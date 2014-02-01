@@ -1,0 +1,6 @@
+#ifndef _VERSION_H_
+#define _VERSION_H_
+
+#define APP_VERSION @VERSION@
+#define APP_NAME mybookdb
+#endif

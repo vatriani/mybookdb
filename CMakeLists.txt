@@ -13,8 +13,7 @@ string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" VERSION_PATCH "${VER
 string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+(.*)" "\\1" VERSION_SHA1 "${VERSION}")
 set(VERSION_SHORT "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
-
-configure_file(config.h.in ${CMAKE_BINARY_DIR}/config.h)
+configure_file(version.h.in ${CMAKE_BINARY_DIR}/version.h)
 
 # adding subdirs for CMake
 
@@ -24,6 +23,6 @@ add_subdirectory(src)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-	add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE})
+	add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} ../Doxyfile)
 endif()
 

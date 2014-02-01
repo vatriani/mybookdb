@@ -1,7 +1,9 @@
-#include <config.h>
+#include "app.h"
 
-int main(int argI, char** argV)
+
+int main(int argI, const char** argV)
 {
-	return 0;
+	App app;
+	return app.Run(argI,argV);
 }
 
