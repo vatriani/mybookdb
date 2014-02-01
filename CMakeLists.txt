@@ -2,13 +2,17 @@ project(mybookdb)
 cmake_minimum_required(VERSION 2.8)
 
 # Configure section
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+include(GetGitRevisionDescription)
+git_describe(VERSION --tags --dirty=-dirty)
 
-set(V_MAJOR 0)
-set(V_MINOR 1)
-set(V_PATCH 0)
+#parse the version information into pieces.
+string(REGEX REPLACE "^v([0-9]+)\\..*" "\\1" VERSION_MAJOR "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.([0-9]+).*" "\\1" VERSION_MINOR "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" VERSION_PATCH "${VERSION}")
+string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+(.*)" "\\1" VERSION_SHA1 "${VERSION}")
+set(VERSION_SHORT "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
-find_package(JPEG REQUIRED)
-include_directories(${JPEG_INCLUDE_DIR})
 
 configure_file(config.h.in ${CMAKE_BINARY_DIR}/config.h)
 
@@ -16,3 +20,10 @@ configure_file(config.h.in ${CMAKE_BINARY_DIR}/config.h)
 
 #add_subdirectory(lib)
 add_subdirectory(src)
+
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+	add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE})
+endif()
+

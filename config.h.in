@@ -1,3 +1,1 @@
-#define VERSION_MAJOR ${V_MAJOR}
-#define VERSION_MINOR ${V_MINOR}
-#define VERSION_PATCH ${V_PATCH}
+extern const char* GIT_VERSION = "@VERSION@";

@@ -7,4 +7,8 @@ set(appMain
 
 add_executable(mybookdb ${appMain})
 
+find_package(JPEG REQUIRED)
+include_directories(${JPEG_INCLUDE_DIR})
+target_link_libraries(mybookdb ${JPEG_LIBRARY})
+
 install(TARGETS mybookdb DESTINATION bin)
