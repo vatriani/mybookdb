@@ -1,5 +1,5 @@
 /*
- * supergemometric - config.cpp
+ * mybookdb - config.cpp
  * Copyright © 2014 - Niels Neumann  <vatriani.nn@googlemail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -84,7 +84,7 @@ std::string Config::GetFromDesc(std::string desc) {
 }
 
 const char* Config::GetFromDesc(char* desc) {
-	return GetFromDesc(std::string(desc)).c_str() ;
+	return GetFromDesc(std::string(desc)).c_str();
 }
 
 bool Config::SetValue(std::string desc, std::string value) {
