@@ -1,31 +1,29 @@
 include_directories(${CMAKE_BINARY_DIR})
 message(STATUS ${CMAKE_BINARY_DIR})
 
-# add qt5 stuff
-find_package(Qt5Widgets REQUIRED)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-
-include_directories(${Qt5Widgets_INCLUDES})
-add_definitions(${Qt5Widgets_DEFINITIONS})
-# end qt5 stuff
-
-
 # qt ui files
 QT5_WRAP_UI(UIS_HDRS
 	ui/mainwindow.ui
+	ui/overview.ui
+	ui/bookdescription.ui
+	ui/toolbargroups.ui
 )
 
 
 set(appMain
 	main.cpp
-	config.cpp
-
+	library.cpp
 	ui/mainwindow.cpp
+	ui/overview.cpp
+	ui/bookdescription.cpp
+	ui/toolbargroups.cpp
+	entry.cpp
 )
 
+qt5_add_resources(RES_OUT ../res/ressources.qrc)
 
-add_executable(mybookdb ${appMain} ${UIS_HDRS})
+
+add_executable(mybookdb ${appMain} ${UIS_HDRS} qrc_ressources.cpp)
 
 include(CheckCXXCompilerFlag)
 
@@ -33,10 +31,6 @@ find_package(Threads REQUIRED)
 include_directories(${THREAD_INCLUDE_DIR})
 target_link_libraries(mybookdb ${THREAD_LIBRARY})
 
-find_package(JPEG REQUIRED)
-include_directories(${JPEG_INCLUDE_DIR})
-target_link_libraries(mybookdb ${JPEG_LIBRARY})
+qt5_use_modules(mybookdb Widgets Sql)
 
-qt5_use_modules(mybookdb Widgets)
-
-#install(TARGETS mybookdb DESTINATION bin)
+install(TARGETS mybookdb DESTINATION bin)

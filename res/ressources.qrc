@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/toolbar">
+        <file>application_exit.png</file>
+        <file>apply.png</file>
+        <file>book.png</file>
+        <file>button_cancel.png</file>
+        <file>clear_left.png</file>
+        <file>configure.png</file>
+        <file>dialog_cancel.png</file>
+        <file>dialog_close.png</file>
+        <file>edit_add.png</file>
+        <file>edit_clear_list.png</file>
+        <file>editpaste.png</file>
+        <file>editdelete.png</file>
+        <file>edit_find.png</file>
+        <file>filter.png</file>
+        <file>printer.png</file>
+    </qresource>
+    <qresource prefix="/main">
+        <file>app.png</file>
+    </qresource>
+</RCC>
