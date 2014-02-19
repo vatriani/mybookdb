@@ -35,8 +35,11 @@ add_definitions(${Qt5Widget_DEFINITIONS})
 # raw sqlite3_ functions required for FTS support. This way we know that those symbols
 # exist at compile-time and that our code links to the same sqlite library as the
 # Qt driver.
-#add_subdirectory(lib/qsqlite)
-#include_directories("lib/qsqlite")
+#add_subdirectory(lib/sqlite3)
+#include_directories("lib/sqlite3")
+
+add_subdirectory(lib/aws)
+include_directories("lib/aws")
 
 add_subdirectory(src)
 
@@ -45,4 +48,3 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
 	add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} ../Doxyfile)
 endif()
-

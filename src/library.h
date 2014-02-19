@@ -2,12 +2,12 @@
 #define LIBRARY_H
 
 #include <QObject>
-#include <QSql>
-#include <QSqlDatabase>
-#include <QSqlDriver>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlTableModel>
+#include <QString>
+#include <QList>
+
+#include "sqlite3.h"
+#include "version.h"
+
 
 
 class library : public QObject
@@ -15,14 +15,21 @@ class library : public QObject
 	Q_OBJECT
 public:
 	explicit library(QObject *parent = 0);
+	~library();
 
-signals:
+	bool open(QString filename);
+	QList<QList<QString> > query(QString query);
+	QList<QString> querySingle(QString query);
+	void close();
 
-public slots:
+
+	QList<QString> getBooksFromAuthor(QString author);
+	QList<QString> getBooksFromSeries(QString serie);
 
 private:
-	QSqlDatabase db;
-
+	sqlite3 *db;
 };
+
+extern library *_library;
 
 #endif // LIBRARY_H

@@ -18,6 +18,7 @@ set(appMain
 	ui/bookdescription.cpp
 	ui/toolbargroups.cpp
 	entry.cpp
+	isbn.cpp
 )
 
 qt5_add_resources(RES_OUT ../res/ressources.qrc)
@@ -31,6 +32,12 @@ find_package(Threads REQUIRED)
 include_directories(${THREAD_INCLUDE_DIR})
 target_link_libraries(mybookdb ${THREAD_LIBRARY})
 
-qt5_use_modules(mybookdb Widgets Sql)
+find_package(Sqlite3 REQUIRED)
+include_directories(${SQLITE3_INCLUDE_DIR})
+target_link_libraries(mybookdb ${SQLITE3_LIBRARIES})
+
+target_link_libraries(mybookdb)
+
+qt5_use_modules(mybookdb Widgets)
 
 install(TARGETS mybookdb DESTINATION bin)

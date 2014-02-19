@@ -15,8 +15,13 @@
         <file>edit_find.png</file>
         <file>filter.png</file>
         <file>printer.png</file>
+        <file>referencer.png</file>
+        <file>star_off.png</file>
+        <file>star_on.png</file>
     </qresource>
     <qresource prefix="/main">
         <file>app.png</file>
+        <file>nocover_book.png</file>
+        <file>person.png</file>
     </qresource>
 </RCC>

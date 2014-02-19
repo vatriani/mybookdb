@@ -15,6 +15,12 @@ public:
 	explicit bookdescription(QWidget *parent = 0);
 	~bookdescription();
 
+public slots:
+	void inputIsbn(QString);
+	void resetIsbn();
+
+	void openBook(QString key);
+
 private:
 	Ui::bookdescription *ui;
 };

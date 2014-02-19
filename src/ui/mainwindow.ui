@@ -78,6 +78,8 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionAbout_2"/>
+    <addaction name="actionAbout_Qt_2"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
@@ -116,6 +118,16 @@
   <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionAbout_2">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt_2">
+   <property name="text">
+    <string>About Qt</string>
    </property>
   </action>
  </widget>

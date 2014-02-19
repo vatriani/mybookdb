@@ -62,7 +62,13 @@
         <string notr="true"/>
        </property>
        <property name="maxLength">
-        <number>13</number>
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
        </property>
       </widget>
      </item>

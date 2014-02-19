@@ -1,6 +1,9 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define APP_VERSION @VERSION@
+#define APP_VERSION "@VERSION@"
 #define APP_NAME mybookdb
+
+static const char *APP_NAME = "mybookdb";
+static const char *APP_CONFIG = "config";
 #endif

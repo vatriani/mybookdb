@@ -12,6 +12,7 @@
 #include "toolbargroups.h"
 
 #include "../library.h"
+#include "version.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,10 +28,13 @@ public:
 
 	void closeEvent(QCloseEvent *event);
 
+public slots:
+	void showVersion();
+	void showQt();
+
 private:
 	Ui::MainWindow *ui;
 
-	library *Library;
 	overview *OverView;
 	bookdescription *BookDescription;
 	toolbargroups *ToolBarGroups;
