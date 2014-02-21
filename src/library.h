@@ -18,13 +18,17 @@ public:
 	~library();
 
 	bool open(QString filename);
-	QList<QList<QString> > query(QString query);
-	QList<QString> querySingle(QString query);
+	QList<QList<QString> > query2LinkedLists(QString query);
+	QList<QString> queryLinkedList(QString query);
+	QString querySingle(QString query);
 	void close();
 
-
-	QList<QString> getBooksFromAuthor(QString author);
+	QList<QList<QString> > getAllAuthors();
+	QList<QString> getBooksFromAuthorKey(QString authorKey);
 	QList<QString> getBooksFromSeries(QString serie);
+	QList<QString> getAuthorsOfBook(QString book);
+	QList<QString> getFullBookByKey(QString key);
+	QString getBookKeyByTitle(QString title);
 
 private:
 	sqlite3 *db;

@@ -36,7 +36,7 @@ void overview::initialModel(QList<QList<QString> > tmp)
 
 void overview::buildTree()
 {
-	QList<QList<QString> > tmp =_library->query("SELECT authors.name,authors.key FROM authors;");
+	QList<QList<QString> > tmp =_library->getAllAuthors();
 	QStandardItem *tmpItem[tmp.length()];
 
 
@@ -44,14 +44,12 @@ void overview::buildTree()
 		tmpItem[counter] = new QStandardItem(tmp[counter][0]);
 		tmpItem[counter]->setIcon(QIcon(":/main/person.png"));
 
-		QString booktitle = "SELECT book.title FROM book JOIN author ON author.book = book.key WHERE author.authors LIKE '";
-		booktitle.append(tmp[counter][1]);
-		booktitle.append("' ORDER BY book.title;");
-		QList<QList<QString> > tmpBooks = _library->query(booktitle);
+		QList<QString> tmpBooks = _library->getBooksFromAuthorKey(tmp[counter][1]);
+
 		QStandardItem *tmpItemBooks[tmpBooks.length()];
 
 		for(int counterB=0; counterB<tmpBooks.length(); counterB++) {
-			tmpItemBooks[counterB] = new QStandardItem(tmpBooks[counterB][0]);
+			tmpItemBooks[counterB] = new QStandardItem(tmpBooks[counterB]);
 			tmpItem[counter]->appendRow(tmpItemBooks[counterB]);
 		}
 
@@ -76,9 +74,6 @@ void overview::selectionChanged(const QModelIndex &, const QModelIndex &)
 
 	if(hierarchyLevel>1)
 	{
-		QString bookKey = "SELECT book.key FROM book WHERE book.title LIKE '";
-		bookKey.append(selectedText);
-		bookKey.append("';");
-		emit this->openBook(_library->querySingle(bookKey)[0]);
+		emit this->openBook(_library->getBookKeyByTitle(selectedText));
 	}
 }

@@ -45,12 +45,26 @@ void bookdescription::resetIsbn()
 	}
 }
 
+/**
+ * @brief bookdescription::openBook
+ * language, description, serie, publisher, title, isbn, key
+ * @param key
+ */
 void bookdescription::openBook(QString key)
 {
-	QString bookQuery = "SELECT * FROM book WHERE book.key LIKE '";
-	bookQuery.append(key);
-	bookQuery.append("';");
-	QList<QString> book = _library->querySingle(bookQuery);
+	this->bookKey=key;
+	QList<QString> book = _library->getFullBookByKey(this->bookKey);
 
+	ui->lineEditTitle->setText(book[7]);
+	ui->lineEditISBN->setText(book[8]);
+
+
+	QList<QString> author = _library->getAuthorsOfBook(this->bookKey);
+	/*while(bookQuery.length())
+	{
+
+	}
+*/
 	qDebug() << book;
+	qDebug() << author;
 }

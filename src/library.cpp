@@ -23,16 +23,16 @@ library::library(QObject *parent) :
 	QByteArray string = dbFile.toLocal8Bit();
 
 	this->open(string.data());
-	query("CREATE TABLE IF NOT EXISTS author (authors NUMERIC, book NUMERIC);");
-	query("CREATE TABLE IF NOT EXISTS authors (name TEXT, key INTEGER PRIMARY KEY);");
-	query("CREATE TABLE IF NOT EXISTS book (language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, key INTEGER PRIMARY KEY);");
-	query("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
-	query("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");
-	query("CREATE TABLE IF NOT EXISTS keyword (keywords NUMERIC, book NUMERIC);");
-	query("CREATE TABLE IF NOT EXISTS keywords (key INTEGER PRIMARY KEY, name TEXT);");
-	query("CREATE TABLE IF NOT EXISTS languages (key INTEGER PRIMARY KEY, name TEXT);");
-	query("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT);");
-	query("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS author (authors NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS authors (name TEXT, key INTEGER PRIMARY KEY);");
+	querySingle("CREATE TABLE IF NOT EXISTS book (pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, key INTEGER PRIMARY KEY);");
+	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS keyword (keywords NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS keywords (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS languages (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT);");
 }
 
 
@@ -53,7 +53,7 @@ bool library::open(QString filename)
 }
 
 
-QList<QList<QString> > library::query(QString query)
+QList<QList<QString> > library::query2LinkedLists(QString query)
 {
 	sqlite3_stmt *statement;
 	QList<QList<QString> > results;
@@ -86,7 +86,7 @@ QList<QList<QString> > library::query(QString query)
 	return results;
 }
 
-QList<QString> library::querySingle(QString query)
+QList<QString> library::queryLinkedList(QString query)
 {
 	sqlite3_stmt *statement;
 	QList<QString> results;
@@ -116,18 +116,81 @@ QList<QString> library::querySingle(QString query)
 }
 
 
+QString library::querySingle(QString query)
+{
+	sqlite3_stmt *statement;
+	QString results;
+
+	if(sqlite3_prepare_v2(this->db, query.toLocal8Bit(), -1, &statement, 0) == SQLITE_OK)
+	{
+		int cols = sqlite3_column_count(statement);
+		int result = 0;
+		while(true)
+		{
+			result = sqlite3_step(statement);
+
+			if(result == SQLITE_ROW)
+					results=(QString((char*)sqlite3_column_text(statement, 0)));
+			else
+				break;
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	QString error = QString(sqlite3_errmsg(this->db));
+	if(error != "not an error")qDebug() << error;
+
+	return results;
+}
+
+
 
 void library::close()
 {
 	sqlite3_close(this->db);
 }
 
-QList<QString> library::getBooksFromAuthor(QString author)
+QList<QList<QString> > library::getAllAuthors()
 {
+	return this->query2LinkedLists("SELECT authors.name,authors.key FROM authors;");
+}
 
+QList<QString> library::getBooksFromAuthorKey(QString authorKey)
+{
+	QString booktitle = "SELECT book.title FROM book JOIN author ON author.book = book.key WHERE author.authors LIKE '";
+	booktitle.append(authorKey);
+	booktitle.append("' ORDER BY book.title;");
+	return this->queryLinkedList(booktitle);
 }
 
 QList<QString> library::getBooksFromSeries(QString serie)
 {
 
+}
+
+QList<QString> library::getAuthorsOfBook(QString bookKey)
+{
+	QString bookQuery ="SELECT authors.name FROM authors JOIN author ON authors.key = author.authors WHERE author.book LIKE '";
+	bookQuery.append(bookKey);
+	bookQuery.append("';");
+
+	return this->queryLinkedList(bookQuery);
+}
+
+QList<QString> library::getFullBookByKey(QString key)
+{
+	QString bookQuery = "SELECT * FROM book WHERE book.key LIKE '";
+	bookQuery.append(key);
+	bookQuery.append("';");
+
+	return this->queryLinkedList(bookQuery);
+}
+
+QString library::getBookKeyByTitle(QString title)
+{
+	QString bookKey = "SELECT book.key FROM book WHERE book.title LIKE '";
+	bookKey.append(title);
+	bookKey.append("';");
+	return this->querySingle(bookKey);
 }

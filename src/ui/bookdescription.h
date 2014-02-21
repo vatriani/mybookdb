@@ -2,6 +2,7 @@
 #define BOOKDESCRIPTION_H
 
 #include <QWidget>
+#include <QString>
 
 namespace Ui {
 class bookdescription;
@@ -23,6 +24,7 @@ public slots:
 
 private:
 	Ui::bookdescription *ui;
+	QString bookKey;
 };
 
 #endif // BOOKDESCRIPTION_H
