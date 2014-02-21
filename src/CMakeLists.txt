@@ -17,7 +17,6 @@ set(appMain
 	ui/overview.cpp
 	ui/bookdescription.cpp
 	ui/toolbargroups.cpp
-	entry.cpp
 	isbn.cpp
 )
 
