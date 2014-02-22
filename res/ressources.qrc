@@ -2,7 +2,6 @@
     <qresource prefix="/toolbar">
         <file>application_exit.png</file>
         <file>apply.png</file>
-        <file>book.png</file>
         <file>button_cancel.png</file>
         <file>clear_left.png</file>
         <file>configure.png</file>
@@ -15,7 +14,6 @@
         <file>edit_find.png</file>
         <file>filter.png</file>
         <file>printer.png</file>
-        <file>referencer.png</file>
         <file>star_off.png</file>
         <file>star_on.png</file>
     </qresource>
@@ -23,5 +21,6 @@
         <file>app.png</file>
         <file>nocover_book.png</file>
         <file>person.png</file>
+        <file>book.png</file>
     </qresource>
 </RCC>
