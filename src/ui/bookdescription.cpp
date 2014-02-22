@@ -1,7 +1,6 @@
 #include "bookdescription.h"
 #include "ui_bookdescription.h"
 
-#include <QMessageBox>
 #include <QDebug>
 
 #include "../isbn.h"

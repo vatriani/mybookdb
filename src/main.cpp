@@ -1,6 +1,6 @@
 /**
- * @file  main.cpp
- * @brief Contains definitions of the struct tuple and classdefinition of Config.
+ * @file main.cpp
+ * @brief Contains int main function.
  * @copyright
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,16 @@
  * @version 1.0
  */
 
+
 #include "ui/mainwindow.h"
 #include <QApplication>
 
+
+/**
+ * @brief Programm entry point.
+ *
+ * Create a object from QApplication and MainWindow.
+ */
 int main(int argc, char** argv)
 {
 	QApplication a(argc, argv);
