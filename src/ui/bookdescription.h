@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QString>
+#include "ratingbar.h"
 
 namespace Ui {
 class bookdescription;
@@ -25,6 +26,8 @@ public slots:
 private:
 	Ui::bookdescription *ui;
 	QString bookKey;
+
+	ratingbar *Ratingbar;
 };
 
 #endif // BOOKDESCRIPTION_H

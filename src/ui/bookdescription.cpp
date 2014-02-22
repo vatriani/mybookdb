@@ -13,6 +13,9 @@ bookdescription::bookdescription(QWidget *parent) :
 	ui->setupUi(this);
 	connect(this->ui->lineEditISBN,SIGNAL(textChanged(QString)),this,SLOT(inputIsbn(QString)));
 	connect(this->ui->lineEditISBN,SIGNAL(editingFinished()),this,SLOT(resetIsbn()));
+
+	this->Ratingbar = new ratingbar(this);
+	ui->gridLayout_2->addWidget(this->Ratingbar,2,1);
 }
 
 bookdescription::~bookdescription()

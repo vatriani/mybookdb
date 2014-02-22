@@ -11,13 +11,14 @@ QT5_WRAP_UI(UIS_HDRS
 
 
 set(appMain
-	main.cpp
 	library.cpp
 	ui/mainwindow.cpp
 	ui/overview.cpp
 	ui/bookdescription.cpp
 	ui/toolbargroups.cpp
+	ui/ratingbar.cpp
 	isbn.cpp
+	main.cpp
 )
 
 qt5_add_resources(RES_OUT ../res/ressources.qrc)
