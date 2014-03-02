@@ -12,12 +12,13 @@ QT5_WRAP_UI(UIS_HDRS
 
 set(appMain
 	library.cpp
-	ui/mainwindow.cpp
-	ui/overview.cpp
-	ui/bookdescription.cpp
+	isbn.cpp
+	networkscanner.cpp
 	ui/toolbargroups.cpp
 	ui/ratingbar.cpp
-	isbn.cpp
+	ui/overview.cpp
+	ui/bookdescription.cpp
+	ui/mainwindow.cpp
 	main.cpp
 )
 
@@ -38,6 +39,6 @@ target_link_libraries(mybookdb ${SQLITE3_LIBRARIES})
 
 target_link_libraries(mybookdb)
 
-qt5_use_modules(mybookdb Widgets)
+qt5_use_modules(mybookdb Widgets Network)
 
 install(TARGETS mybookdb DESTINATION bin)
