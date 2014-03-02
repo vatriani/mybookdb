@@ -14,12 +14,16 @@ public:
 signals:
 
 public slots:
+	void changeRating();
+
+protected:
+	void wheelEvent(QWheelEvent *event);
 
 private:
 	void createUi();
 
 	QLabel *stars[10];
-
+	unsigned int rating;
 };
 
 #endif // RATINGBAR_H
