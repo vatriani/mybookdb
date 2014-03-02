@@ -18,7 +18,7 @@
  */
 
 /**
- * @defgroup non GUI classes
+ * @addtogroup NGUI non GUI classes
  * @{
  */
 
