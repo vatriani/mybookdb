@@ -11,50 +11,58 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 	_library = new library(this);
-	CreateUi();
-	ReadConfig();
+	createUi();
+	readConfig();
 
+	this->NetworkScanner = new networkscanner;
+	connect(this->NetworkScanner,SIGNAL(newBarcode(QString)),this->BookDescription,SLOT(isbnScanner(QString)));
 }
 
 MainWindow::~MainWindow()
 {
-	delete this->New;
-	delete this->Save;
-	delete this->Print;
-	delete this->Search;
-	delete this->ShowAll;
+	delete this->ActionNew;
+	delete this->ActionSave;
+	delete this->ActionPrint;
+	delete this->ActionSearch;
+	delete this->ActionShowAll;
 	delete this->ToolBarGroups;
 	delete this->ToolBar;
 	delete this->OverView;
 	delete this->BookDescription;
 	delete _library;
 	delete ui;
+
+	delete this->NetworkScanner;
 }
 
-void MainWindow::CreateUi()
+void MainWindow::createUi()
 {
 	this->setWindowIcon(QIcon(":/main/app.png"));
 
 	this->ui->actionQuit->setIcon(QIcon(":/toolbar/application_exit.png"));
 
-	New = new QAction(QIcon(":/toolbar/book.png"), tr("New"), this);
-	Save = new QAction(this);
-	Print = new QAction(QIcon(":/toolbar/printer.png"), tr("Print"), this);
-	Search = new QAction(QIcon(":/toolbar/search.png"), tr("Search"), this);
-	this->ShowAll = new QAction(this);
+	this->ActionNew = new QAction(QIcon(":/toolbar/filenew.png"), tr("New"), this);
+	this->ActionSave = new QAction(QIcon(":/toolbar/document_save.png"), tr("New"), this);
+	this->ActionPrint = new QAction(QIcon(":/toolbar/printer.png"), tr("Print"), this);
+	this->ActionSearch = new QAction(QIcon(":/toolbar/edit_find.png"), tr("Search"), this);
+	this->ActionShowAll = new QAction(QIcon(":/toolbar/edit_clear_list.png"), tr("Search"), this);
+	this->ActionBarcodeScanner = new QAction(QIcon(":/toolbar/barcode.png"), tr("Scan from Barcode"), this);
+	this->ActionBarcodeScanner->setCheckable(true);
+
 
 	this->ToolBarGroups = new toolbargroups(this);
 
-	ToolBar = new QToolBar(this);
-	ToolBar->addAction(New);
-	ToolBar->addAction(Save);
-	ToolBar->addAction(Print);
+	this->ToolBar = new QToolBar(this);
+	this->ToolBar->addAction(this->ActionNew);
+	this->ToolBar->addAction(this->ActionSave);
+	this->ToolBar->addAction(this->ActionPrint);
 	this->ToolBar->addSeparator();
-	ToolBar->addAction(Search);
-	this->ToolBar->addAction(this->ShowAll);
+	this->ToolBar->addAction(this->ActionSearch);
+	this->ToolBar->addAction(this->ActionShowAll);
+	this->ToolBar->addAction(this->ActionBarcodeScanner);
 	this->ToolBar->addSeparator();
 	this->ToolBar->addWidget(this->ToolBarGroups);
-	ToolBar->setWindowTitle(tr("Main ToolBar"));
+	this->ToolBar->setWindowTitle(tr("Main ToolBar"));
 	this->addToolBar(ToolBar);
 
 	this->OverView = new overview(this);
@@ -72,7 +80,7 @@ void MainWindow::CreateUi()
 	connect(this->OverView,SIGNAL(openBook(QString)),this->BookDescription,SLOT(openBook(QString)));
 }
 
-void MainWindow::ReadConfig()
+void MainWindow::readConfig()
 {
 	QSettings settings(APP_NAME,APP_CONFIG);
 	QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
@@ -81,7 +89,7 @@ void MainWindow::ReadConfig()
 	this->move(pos);
 }
 
-void MainWindow::SaveConfig()
+void MainWindow::saveConfig()
 {
 	QSettings settings(APP_NAME,APP_CONFIG);
 	settings.setValue("pos", this->pos());
@@ -90,7 +98,7 @@ void MainWindow::SaveConfig()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	SaveConfig();
+	saveConfig();
 	event->accept();
 }
 

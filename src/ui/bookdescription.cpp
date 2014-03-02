@@ -47,10 +47,15 @@ void bookdescription::resetIsbn()
 	}
 }
 
+void bookdescription::isbnScanner(QString tmp)
+{
+	this->ui->lineEditISBN->setText(tmp);
+}
+
 /**
  * @brief bookdescription::openBook
  * language, description, serie, publisher, title, isbn, key
- * @param key
+ * @param key Bookkey
  */
 void bookdescription::openBook(QString key)
 {
