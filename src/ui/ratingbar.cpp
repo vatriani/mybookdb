@@ -62,7 +62,7 @@ void ratingbar::createUi()
 		this->stars[counter] = new QLabel(this);
 		layout->addWidget(this->stars[counter]);
 	}
-
+	layout->addStretch();
 	this->setLayout(layout);
 	this->changeRating();
 }
