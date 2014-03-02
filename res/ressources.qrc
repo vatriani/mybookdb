@@ -16,6 +16,9 @@
         <file>printer.png</file>
         <file>star_off.png</file>
         <file>star_on.png</file>
+        <file>document_save.png</file>
+        <file>filenew.png</file>
+        <file>barcode.png</file>
     </qresource>
     <qresource prefix="/main">
         <file>app.png</file>
