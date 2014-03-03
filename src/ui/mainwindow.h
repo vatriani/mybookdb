@@ -52,6 +52,10 @@ public slots:
 	void showVersion();
 	void showQt();
 
+	void newBook();
+	void toggleScanner(bool isEnabled);
+
+
 private:
 	Ui::MainWindow *ui;
 
