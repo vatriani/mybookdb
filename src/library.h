@@ -43,12 +43,6 @@ public:
 	explicit library(QObject *parent = 0);
 	~library();
 
-	bool open(QString filename);
-	QList<QList<QString> > query2LinkedLists(QString /**query*/);
-	QList<QString> queryLinkedList(QString /**query*/);
-	QString querySingle(QString /**query*/);
-	void close();
-
 	QList<QList<QString> > getAllAuthors();
 	QList<QString> getBooksFromAuthorKey(QString /**authorKey*/);
 	QList<QString> getBooksFromSeries(QString /**serie*/);
@@ -61,12 +55,19 @@ private:
 	 * Handles database connection.
 	 */
 	sqlite3 *db;
+
+	bool open(QString filename);
+	QList<QList<QString> > query2LinkedLists(QString /**query*/);
+	QList<QString> queryLinkedList(QString /**query*/);
+	QString querySingle(QString /**query*/);
+	void close();
 };
 
 /**
- * @brief _library
+ * @brief Global library instance for getting everywhere infos.
  */
 extern library *_library;
+
 
 #endif // LIBRARY_H
 /**
