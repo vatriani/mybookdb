@@ -26,6 +26,9 @@ set(CMAKE_AUTOMOC ON)
 
 include_directories(${Qt5Widget_INCLUDES})
 add_definitions(${Qt5Widget_DEFINITIONS})
+
+set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_RELEASE} -fprofile-arcs -ftest-coverage")
+set_target_properties(Qt5::Core PROPERTIES MAP_IMPORTED_CONFIG_COVERAGE "RELEASE")
 # end qt5 stuff
 
 # adding subdirs for CMake
