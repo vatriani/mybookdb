@@ -50,6 +50,7 @@ void overview::buildTree()
 
 		for(int counterB=0; counterB<tmpBooks.length(); counterB++) {
 			tmpItemBooks[counterB] = new QStandardItem(tmpBooks[counterB]);
+			tmpItemBooks[counterB]->setIcon(QIcon(":/main/book.png"));
 			tmpItem[counter]->appendRow(tmpItemBooks[counterB]);
 		}
 
