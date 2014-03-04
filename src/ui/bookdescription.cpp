@@ -18,6 +18,12 @@ bookdescription::bookdescription(QWidget *parent) :
 	ui->gridLayout_2->addWidget(this->Ratingbar,2,1);
 }
 
+bookdescription::bookdescription(QString bookkey, QWidget *parent) :
+	bookdescription(parent)
+{
+	openBook(bookkey);
+}
+
 bookdescription::~bookdescription()
 {
 	delete ui;
@@ -62,6 +68,7 @@ void bookdescription::openBook(QString key)
 	this->bookKey=key;
 	QList<QString> book = _library->getFullBookByKey(this->bookKey);
 
+	ui->lineEditPages->setText(book[0]);
 	ui->lineEditTitle->setText(book[7]);
 	ui->lineEditISBN->setText(book[8]);
 

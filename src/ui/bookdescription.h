@@ -34,6 +34,7 @@ class bookdescription : public QWidget
 
 public:
 	explicit bookdescription(QWidget *parent = 0);
+	bookdescription(QString, QWidget *parent = 0);
 	~bookdescription();
 
 public slots:
@@ -41,7 +42,7 @@ public slots:
 	void resetIsbn();
 	void isbnScanner(QString);
 
-	void openBook(QString key);
+	void openBook(QString);
 
 private:
 	Ui::bookdescription *ui;
