@@ -39,69 +39,46 @@
  *
  * @todo adding more fields for more gui informations.
  *
- * @section LABEL_DB List of tables in database
- *
  * @dot
  * digraph example {
- *     node [shape=record, fontname=Helvetica, fontsize=10];
- *     a [ label="author" ];
- *     b [ label="authors" ];
- *     c [ label="book" ];
- *     d [ label="genre" ];
- *     e [ label="genres" ];
- *     f [ label="keyword" ];
- *     g [ label="keywords" ];
- *     h [ label="languages" ];
- *     i [ label="publisher" ];
- *     j [ label="serie" ];
- *     a -> b [ arrowhead="open", style="solid" ];
- *     d -> e [ arrowhead="open", style="solid" ];
- *     f -> g [ arrowhead="open", style="solid" ];
- *     b -> c [ arrowhead="open", style="solid" ];
- *     e -> c [ arrowhead="open", style="solid" ];
- *     g -> c [ arrowhead="open", style="solid" ];
- *     c -> h [ arrowhead="open", style="solid" ];
- *     c -> i [ arrowhead="open", style="solid" ];
- *     c -> j [ arrowhead="open", style="solid" ];
+ *   fontname = "Bitstream Vera Sans"
+ *   fontsize = 8
+ *
+ *   node [
+ *     fontname = "Bitstream Vera Sans"
+ *     fontsize = 8
+ *     shape = "record"
+ *   ]
+ *
+ *   edge [
+ *     fontname = "Bitstream Vera Sans"
+ *     fontsize = 8
+ *     arrowhead = "none"
+ *   ]
+ *
+ *   authors [ label="{authors|authors : NUMERIC\lbook : NUMERIC\l}" ];
+ *   author [ label="{author|name : TEXT\lkey : NUMERIC\l}" ];
+ *   book [ label="{book|rating : NUMERIC\lpages : NUMERIC\llanguage : NUMERIC\ldescrtiption : TEXT\lserie : NUMERIC\lpublisher : NUMERIC\ltitle : TEXT\lisbn : TEXT\lkey : NUMERIC\l}" ];
+ *   genre [ label="{genre|key : NUMERIC\lname : TEXT\l}" ];
+ *   genres [ label="{genres|book : NUMERIC\lgenre : NUMERIC\l}" ];
+ *   keyword [ label="{keyword|key : NUMERIC\lname : TEXT\l}" ];
+ *   keywords [ label="{keywords|book : NUMERIC\lkeyword : NUMERIC\l}" ];
+ *   languages [ label="{languages|key : NUMERIC\lname : TEXT\l}" ];
+ *   publisher [ label="{publisher|key : NUMERIC\lname : TEXT\l}" ];
+ *   serie [ label="{serie|key : NUMERIC\lname : TEXT\l}" ];
+ *
+ *   author -> authors [ taillabel="key 1", headlabel="authors 1..*" ];
+ *   genre -> genres [ taillabel="key 1", headlabel="genre 1..*" ];
+ *   keyword -> keywords [ taillabel="key 1", headlabel="keyword 1..*" ];
+ *   authors -> book [ taillabel="book 1..*", headlabel="" ];
+ *   genres -> book [ taillabel="book 1..*", headlabel="" ];
+ *   keywords -> book [ taillabel="book 1..*", headlabel="" ];
+ *   book -> languages [ taillabel="language 1", headlabel="key 1" ];
+ *   book -> publisher [ taillabel="publisher 1", headlabel="key 1" ];
+ *   book -> serie [ taillabel="serie 1", headlabel="key 1" ];
  * }
  * @enddot
  *
- * @subsection author
- *     - authors @a NUMERIC
- *     - book @a NUMERIC
- * @subsection authors
- *     - name @a TEXT
- *     - key @a NUMERIC
- * @subsection book
- *     - pages @a NUMERIC
- *     - language @a NUMERIC
- *     - description @a TEXT
- *     - serie @a NUMERIC
- *     - publisher @a NUMERIC
- *     - title @a TEXT
- *     - isbn @a TEXT
- *     - key @a NUMERIC
- * @subsection genre
- *     - key  @a NUMERIC
- *     - name @a TEXT
- * @subsection genres
- *     - book @a NUMERIC
- *     - genre @a NUMERIC
- * @subsection keyword
- *     - key @a NUMERIC
- *     - name @a TEXT
- * @subsection keywords
- *     - key @a NUMERIC
- *     - name @a TEXT
- * @subsection languages
- *     - key @a NUMERIC
- *     - name @a TEXT
- * @subsection publisher
- *     - key @a NUMERIC
- *     - name @a TEXT
- * @subsection serie
- *     - key @a NUMERIC
- *     - name @a TEXT
  * @}
  */
 
