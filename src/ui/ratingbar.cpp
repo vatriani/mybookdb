@@ -26,6 +26,12 @@ int ratingbar::getRating()
 	return this->rating;
 }
 
+void ratingbar::setRating(int rating)
+{
+	this->rating = rating;
+	changeRating();
+}
+
 void ratingbar::changeRating()
 {
 	QIcon* starOff = new QIcon(":/toolbar/star_off.png");

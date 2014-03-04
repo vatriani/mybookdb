@@ -49,6 +49,11 @@ public:
 	 * @return Rating as int.
 	 */
 	int getRating();
+	/**
+	 * @brief Default setter method for rating.
+	 * @param rating Rating representing by an integer.
+	 */
+	void setRating(int);
 
 signals:
 
