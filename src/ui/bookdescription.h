@@ -22,6 +22,11 @@
 
 #include <QWidget>
 #include <QString>
+#include <QStandardItemModel>
+#include <QList>
+#include <QComboBox>
+
+
 #include "ratingbar.h"
 
 namespace Ui {
@@ -49,6 +54,8 @@ private:
 	QString bookKey;
 
 	ratingbar *Ratingbar;
+	QStandardItemModel *getItemModelFromList(QList<QString>);
+	void setComboBoxIndex(QComboBox*,QString);
 };
 
 #endif // BOOKDESCRIPTION_H

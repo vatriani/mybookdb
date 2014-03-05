@@ -2,6 +2,10 @@
 #include "ui_bookdescription.h"
 
 #include <QDebug>
+#include <QComboBox>
+#include <QListView>
+#include <QStandardItemModel>
+#include <QStandardItem>
 
 #include "../isbn.h"
 #include "../library.h"
@@ -16,6 +20,12 @@ bookdescription::bookdescription(QWidget *parent) :
 
 	this->Ratingbar = new ratingbar(this);
 	ui->gridLayout_2->addWidget(this->Ratingbar,2,1);
+
+	ui->comboBoxLanguage->addItems(_library->getAllLanguages());
+	ui->comboBoxGenre->addItems(_library->getAllGenres());
+	ui->comboBoxAuthors->addItems(_library->getAllAuthors());
+	ui->comboBoxPublisher->addItems(_library->getAllPublishers());
+	ui->comboBoxCollection->addItems(_library->getAllCollections());
 }
 
 bookdescription::bookdescription(QString bookkey, QWidget *parent) :
@@ -68,17 +78,36 @@ void bookdescription::openBook(QString key)
 	this->bookKey=key;
 	QList<QString> book = _library->getFullBookByKey(this->bookKey);
 
-	ui->lineEditPages->setText(book[0]);
-	ui->lineEditTitle->setText(book[7]);
-	ui->lineEditISBN->setText(book[8]);
+	this->Ratingbar->setRating(book[0].toInt());
+	ui->lineEditPages->setText(book[1]);
+	ui->lineEditTitle->setText(book[6]);
+	ui->lineEditISBN->setText(book[7]);
+
+	ui->listViewAuthors->setModel(this->getItemModelFromList(_library->getAuthorsOfBook(this->bookKey)));
+	ui->listViewGenre->setModel(this->getItemModelFromList(_library->getGenresOfBook(this->bookKey)));
 
 
-	QList<QString> author = _library->getAuthorsOfBook(this->bookKey);
-	/*while(bookQuery.length())
+	//ui->comboBoxCollection->findData(_library->getSerieNameFromKey(book[4]));
+	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[4]));
+	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[2]));
+	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[5]));
+}
+
+QStandardItemModel *bookdescription::getItemModelFromList(QList<QString> list)
+{
+	QStandardItemModel *model = new QStandardItemModel();
+	QStandardItem *tmpItem[list.length()];
+
+	for(int counter = 0; counter < list.length(); counter++)
 	{
-
+		tmpItem[counter] = new QStandardItem(list[counter]);
+		model->appendRow(tmpItem[counter]);
 	}
-*/
-	qDebug() << book;
-	qDebug() << author;
+
+	return model;
+}
+
+void bookdescription::setComboBoxIndex(QComboBox *box, QString string)
+{
+	box->setCurrentIndex(box->findText(string));
 }
