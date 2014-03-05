@@ -23,8 +23,8 @@ bookdescription::bookdescription(QWidget *parent) :
 	ui->gridLayout_2->addWidget(this->Ratingbar,2,1);
 
 	ui->comboBoxLanguage->addItems(_library->getAllLanguages());
-	ui->comboBoxGenre->addItems(_library->getAllGenres());
-	ui->comboBoxAuthors->addItems(_library->getAllAuthors());
+	ui->groupBoxGenre->addToChooser(_library->getAllGenres());
+	ui->groupBoxAuthors->addToChooser(_library->getAllAuthors());
 	ui->comboBoxPublisher->addItems(_library->getAllPublishers());
 	ui->comboBoxCollection->addItems(_library->getAllCollections());
 }
@@ -84,8 +84,8 @@ void bookdescription::openBook(QString key)
 	ui->lineEditTitle->setText(book[DB_BOOK_TITLE]);
 	ui->lineEditISBN->setText(book[DB_BOOK_ISBN]);
 
-	ui->listViewAuthors->setModel(getItemModelFromList(_library->getAuthorsOfBook(this->bookKey)));
-	ui->listViewGenre->setModel(getItemModelFromList(_library->getGenresOfBook(this->bookKey)));
+	ui->groupBoxAuthors->addToView(_library->getAuthorsOfBook(this->bookKey));
+	ui->groupBoxGenre->addToView(_library->getGenresOfBook(this->bookKey));
 
 	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[DB_BOOK_SERIE]));
 	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[DB_BOOK_LANGUAGE]));
