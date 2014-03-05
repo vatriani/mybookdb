@@ -19,6 +19,8 @@
         <file>document_save.png</file>
         <file>filenew.png</file>
         <file>barcode.png</file>
+        <file>downarrow.png</file>
+        <file>rightarrow.png</file>
     </qresource>
     <qresource prefix="/main">
         <file>app.png</file>
