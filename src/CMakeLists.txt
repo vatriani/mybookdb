@@ -15,6 +15,7 @@ set(appMain
 	isbn.cpp
 	networkscanner.cpp
 	amazonsearch.cpp
+	uihelpers.cpp
 	ui/toolbargroups.cpp
 	ui/ratingbar.cpp
 	ui/overview.cpp

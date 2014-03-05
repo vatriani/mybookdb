@@ -1,6 +1,6 @@
 /**
- * @file bookdescription.h
- * @brief
+ * @file uihelpers.h
+ * @brief Some useful functions for better gui handling.
  * @copyright
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,43 +17,23 @@
  * @version 1.0
  */
 
-#ifndef BOOKDESCRIPTION_H
-#define BOOKDESCRIPTION_H
+/**
+ * @addtogroup NGUI non GUI classes
+ * @{
+ */
+#ifndef UIHELPERS_H
+#define UIHELPERS_H
 
-#include <QWidget>
-#include <QString>
 #include <QStandardItemModel>
 #include <QList>
+#include <QString>
 #include <QComboBox>
 
 
-#include "ratingbar.h"
+QStandardItemModel *getItemModelFromList(QList<QString>);
+void setComboBoxIndex(QComboBox*,QString);
 
-namespace Ui {
-class bookdescription;
-}
-
-class bookdescription : public QWidget
-{
-	Q_OBJECT
-
-public:
-	explicit bookdescription(QWidget *parent = 0);
-	bookdescription(QString, QWidget *parent = 0);
-	~bookdescription();
-
-public slots:
-	void inputIsbn(QString);
-	void resetIsbn();
-	void isbnScanner(QString);
-
-	void openBook(QString);
-
-private:
-	Ui::bookdescription *ui;
-	QString bookKey;
-
-	ratingbar *Ratingbar;
-};
-
-#endif // BOOKDESCRIPTION_H
+#endif // UIHELPERS_H
+/**
+ * @}
+ */

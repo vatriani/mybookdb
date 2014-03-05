@@ -9,6 +9,7 @@
 
 #include "../isbn.h"
 #include "../library.h"
+#include "../uihelpers.h"
 
 bookdescription::bookdescription(QWidget *parent) :
 	QWidget(parent),
@@ -83,31 +84,11 @@ void bookdescription::openBook(QString key)
 	ui->lineEditTitle->setText(book[6]);
 	ui->lineEditISBN->setText(book[7]);
 
-	ui->listViewAuthors->setModel(this->getItemModelFromList(_library->getAuthorsOfBook(this->bookKey)));
-	ui->listViewGenre->setModel(this->getItemModelFromList(_library->getGenresOfBook(this->bookKey)));
+	ui->listViewAuthors->setModel(getItemModelFromList(_library->getAuthorsOfBook(this->bookKey)));
+	ui->listViewGenre->setModel(getItemModelFromList(_library->getGenresOfBook(this->bookKey)));
 
 
-	//ui->comboBoxCollection->findData(_library->getSerieNameFromKey(book[4]));
 	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[4]));
 	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[2]));
 	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[5]));
-}
-
-QStandardItemModel *bookdescription::getItemModelFromList(QList<QString> list)
-{
-	QStandardItemModel *model = new QStandardItemModel();
-	QStandardItem *tmpItem[list.length()];
-
-	for(int counter = 0; counter < list.length(); counter++)
-	{
-		tmpItem[counter] = new QStandardItem(list[counter]);
-		model->appendRow(tmpItem[counter]);
-	}
-
-	return model;
-}
-
-void bookdescription::setComboBoxIndex(QComboBox *box, QString string)
-{
-	box->setCurrentIndex(box->findText(string));
 }
