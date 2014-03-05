@@ -58,7 +58,7 @@ void groupBoxCollapse::collapse()
 		this->ButtonNew->setVisible(false);
 		this->ButtonRemove->setVisible(false);
 		this->ComboBoxChooser->setVisible(false);
-		this->setStyleSheet("QGroupBox::indicator { width: 13px; height: 13px; } QGroupBox::indicator:checked { image: url(:/toolbar/rightarrow.png); } QGroupBox { border: 0px; border-radius: 0px; }");
+		this->setStyleSheet("QGroupBox::indicator:checked { image: url(:/toolbar/rightarrow.png); } QGroupBox { border: 0px; border-radius: 0px; }");
 	}
 	else
 	{
@@ -67,7 +67,6 @@ void groupBoxCollapse::collapse()
 		this->ButtonNew->setVisible(true);
 		this->ButtonRemove->setVisible(true);
 		this->ComboBoxChooser->setVisible(true);
-		this->setStyleSheet("QGroupBox::indicator { width: 13px; height: 13px; } QGroupBox::indicator:checked { image: url(:/toolbar/downarrow.png); }");
-		this->repaint();
+		this->setStyleSheet("QGroupBox::indicator:checked { image: url(:/toolbar/downarrow.png); }");
 	}
 }
