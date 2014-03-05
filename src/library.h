@@ -83,6 +83,19 @@
  */
 
 
+enum {
+	DB_BOOK_RATING = 0,
+	DB_BOOK_PAGES,
+	DB_BOOK_LANGUAGE,
+	DB_BOOK_DESCRIPTION,
+	DB_BOOK_SERIE,
+	DB_BOOK_PUBLISHER,
+	DB_BOOK_TITLE,
+	DB_BOOK_ISBN,
+	DB_BOOK_KEY
+};
+
+
 
 /**
  * @brief Handles db querys and db connection.

@@ -30,7 +30,7 @@ bookdescription::bookdescription(QWidget *parent) :
 }
 
 bookdescription::bookdescription(QString bookkey, QWidget *parent) :
-	bookdescription(parent)
+	QWidget(parent)
 {
 	openBook(bookkey);
 }
@@ -79,16 +79,15 @@ void bookdescription::openBook(QString key)
 	this->bookKey=key;
 	QList<QString> book = _library->getFullBookByKey(this->bookKey);
 
-	this->Ratingbar->setRating(book[0].toInt());
-	ui->lineEditPages->setText(book[1]);
-	ui->lineEditTitle->setText(book[6]);
-	ui->lineEditISBN->setText(book[7]);
+	this->Ratingbar->setRating(book[DB_BOOK_RATING].toInt());
+	ui->lineEditPages->setText(book[DB_BOOK_PAGES]);
+	ui->lineEditTitle->setText(book[DB_BOOK_TITLE]);
+	ui->lineEditISBN->setText(book[DB_BOOK_ISBN]);
 
 	ui->listViewAuthors->setModel(getItemModelFromList(_library->getAuthorsOfBook(this->bookKey)));
 	ui->listViewGenre->setModel(getItemModelFromList(_library->getGenresOfBook(this->bookKey)));
 
-
-	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[4]));
-	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[2]));
-	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[5]));
+	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[DB_BOOK_SERIE]));
+	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[DB_BOOK_LANGUAGE]));
+	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[DB_BOOK_PUBLISHER]));
 }
