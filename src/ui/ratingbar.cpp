@@ -37,9 +37,9 @@ void ratingbar::changeRating()
 	QIcon* starOff = new QIcon(":/toolbar/star_off.png");
 	QIcon* starOn = new QIcon(":/toolbar/star_on.png");
 
-	for(int counter = 1; counter < 10; counter++)
+	for(int counter = 0; counter < 10; counter++)
 	{
-		if(counter<=this->rating)
+		if(counter+1 <= this->rating)
 			this->stars[counter]->setPixmap(starOn->pixmap(QSize(18,18)));
 		else
 			this->stars[counter]->setPixmap(starOff->pixmap(QSize(18,18)));
