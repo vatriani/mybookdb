@@ -5,7 +5,9 @@
 groupBoxCollapse::groupBoxCollapse(QWidget *parent) :
 	QGroupBox(parent)
 {
+	this->setCheckable(true);
 	this->isCollapse = false;
+
 	this->LayoutVertical = new QVBoxLayout(this);
 	this->LayoutHorizontal = new QHBoxLayout();
 	this->HorizontalSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -23,6 +25,7 @@ groupBoxCollapse::groupBoxCollapse(QWidget *parent) :
 
 	this->LayoutVertical->addWidget(this->ListView);
 	this->LayoutVertical->addLayout(LayoutHorizontal);
+
 	collapse();
 }
 
@@ -55,8 +58,7 @@ void groupBoxCollapse::collapse()
 		this->ButtonNew->setVisible(false);
 		this->ButtonRemove->setVisible(false);
 		this->ComboBoxChooser->setVisible(false);
-
-		this->setStyleSheet("GroupBox{border:0px;border-radius:0px;}GroupBox::title{image: url(:/toolbar/rightarrow.png, image-position:top center)}");
+		this->setStyleSheet("QGroupBox::indicator { width: 13px; height: 13px; } QGroupBox::indicator:checked { image: url(:/toolbar/rightarrow.png); } QGroupBox { border: 0px; border-radius: 0px; }");
 	}
 	else
 	{
@@ -65,6 +67,7 @@ void groupBoxCollapse::collapse()
 		this->ButtonNew->setVisible(true);
 		this->ButtonRemove->setVisible(true);
 		this->ComboBoxChooser->setVisible(true);
-		this->setStyleSheet("");
+		this->setStyleSheet("QGroupBox::indicator { width: 13px; height: 13px; } QGroupBox::indicator:checked { image: url(:/toolbar/downarrow.png); }");
+		this->repaint();
 	}
 }

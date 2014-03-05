@@ -25,9 +25,10 @@ public:
 signals:
 
 public slots:
+	void collapse();
 
 private:
-	void collapse();
+
 
 	QListView *ListView;
 	QComboBox *ComboBoxChooser;
