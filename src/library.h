@@ -106,14 +106,6 @@ public:
 	~library();
 
 	/**
-	 * @brief Returns all authors listed by the database.
-	 *
-	 * This function is generally only for building up the overviewtree.
-	 * @return Double-linked list of QStrings as result.
-	 * @see query2LinkedLists(QString)
-	 */
-	QList<QList<QString> > getAllAuthors();
-	/**
 	 * @brief Returns all books from one author.
 	 * @param authorkey Key from author->key.
 	 * @return Linked list of QStrings as result, containing book->title.
@@ -134,6 +126,8 @@ public:
 	 * @see queryLinkedList(QString)
 	 */
 	QList<QString> getAuthorsOfBook(QString);
+
+	QList<QString> getGenresOfBook(QString);
 	/**
 	 * @brief Returns all values from the given book of the book-table.
 	 * @param bookkey Key from book->key.
@@ -149,6 +143,25 @@ public:
 	 */
 	QString getBookKeyByTitle(QString);
 
+	QList<QString> getAllLanguages();
+	QList<QString> getAllGenres();
+	/**
+	 * @brief Returns all authors listed by the database.
+	 *
+	 * This function is generally only for building up the overviewtree.
+	 * @return Double-linked list of QStrings as result.
+	 * @see query2LinkedLists(QString)
+	 */
+	QList<QString> getAllAuthors();
+
+	QList<QList<QString> > getAllAuthorsWithKey();
+
+	QList<QString> getAllPublishers();
+	QList<QString> getAllCollections();
+
+	QString getSerieNameFromKey(QString);
+	QString getLanguageFromKey(QString);
+	QString getPublisherFromKey(QString);
 private:
 	/**
 	 * @brief Handles database connection.

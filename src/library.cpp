@@ -35,8 +35,6 @@ library::library(QObject *parent) :
 	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT);");
 }
 
-
-
 library::~library()
 {
 	this->close();
@@ -51,7 +49,6 @@ bool library::open(QString filename)
 
 	return false;
 }
-
 
 QList<QList<QString> > library::query2LinkedLists(QString query)
 {
@@ -115,7 +112,6 @@ QList<QString> library::queryLinkedList(QString query)
 	return results;
 }
 
-
 QString library::querySingle(QString query)
 {
 	sqlite3_stmt *statement;
@@ -144,17 +140,12 @@ QString library::querySingle(QString query)
 	return results;
 }
 
-
-
 void library::close()
 {
 	sqlite3_close(this->db);
 }
 
-QList<QList<QString> > library::getAllAuthors()
-{
-	return this->query2LinkedLists("SELECT authors.name,authors.key FROM authors;");
-}
+
 
 QList<QString> library::getBooksFromAuthorKey(QString authorKey)
 {
@@ -178,6 +169,15 @@ QList<QString> library::getAuthorsOfBook(QString bookKey)
 	return this->queryLinkedList(bookQuery);
 }
 
+QList<QString> library::getGenresOfBook(QString bookKey)
+{
+	QString bookQuery ="SELECT genre.name FROM genre JOIN genres ON genre.key = genres.genre WHERE genres.book LIKE '";
+	bookQuery.append(bookKey);
+	bookQuery.append("';");
+
+	return this->queryLinkedList(bookQuery);
+}
+
 QList<QString> library::getFullBookByKey(QString key)
 {
 	QString bookQuery = "SELECT * FROM book WHERE book.key LIKE '";
@@ -191,6 +191,60 @@ QString library::getBookKeyByTitle(QString title)
 {
 	QString bookKey = "SELECT book.key FROM book WHERE book.title LIKE '";
 	bookKey.append(title);
+	bookKey.append("';");
+	return this->querySingle(bookKey);
+}
+
+QList<QString> library::getAllLanguages()
+{
+	return this->queryLinkedList("SELECT name FROM languages;");
+}
+
+QList<QString> library::getAllGenres()
+{
+	return this->queryLinkedList("SELECT name FROM genre;");
+}
+
+QList<QString> library::getAllAuthors()
+{
+	return this->queryLinkedList("SELECT name FROM authors;");
+}
+
+QList<QList<QString> > library::getAllAuthorsWithKey()
+{
+	return this->query2LinkedLists("SELECT * FROM authors;");
+}
+
+QList<QString> library::getAllPublishers()
+{
+	return this->queryLinkedList("SELECT name FROM publisher;");
+}
+
+QList<QString> library::getAllCollections()
+{
+	return this->queryLinkedList("SELECT name from serie;");
+}
+
+QString library::getSerieNameFromKey(QString key)
+{
+	QString bookKey = "SELECT name FROM serie WHERE key LIKE '";
+	bookKey.append(key);
+	bookKey.append("';");
+	return this->querySingle(bookKey);
+}
+
+QString library::getLanguageFromKey(QString key)
+{
+	QString bookKey = "SELECT name FROM languages WHERE key LIKE '";
+	bookKey.append(key);
+	bookKey.append("';");
+	return this->querySingle(bookKey);
+}
+
+QString library::getPublisherFromKey(QString key)
+{
+	QString bookKey = "SELECT name FROM publisher WHERE key LIKE '";
+	bookKey.append(key);
 	bookKey.append("';");
 	return this->querySingle(bookKey);
 }
