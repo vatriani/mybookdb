@@ -11,6 +11,8 @@ overview::overview(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	ui->treeView->setStyleSheet("QTreeView::branch:has-children:!has-siblings:closed, QTreeView::branch:closed:has-children:has-siblings { border-image: none; image: url(:/toolbar/rightarrow.png); } QTreeView::branch:open:has-children:!has-siblings, QTreeView::branch:open:has-children:has-siblings  { border-image: none; image: url(:/toolbar/downarrow.png);}");
+
 	ui->tab->setWindowIcon(QIcon());
 	ui->tab_2->setWindowIcon(QIcon(":/toolbar/filter.png"));
 	this->ui->dockWidgetContents->setWindowFlags(Qt::SubWindow);
