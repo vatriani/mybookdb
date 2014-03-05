@@ -36,7 +36,7 @@ void overview::initialModel(QList<QList<QString> > tmp)
 
 void overview::buildTree()
 {
-	QList<QList<QString> > tmp =_library->getAllAuthors();
+	QList<QList<QString> > tmp =_library->getAllAuthorsWithKey();
 	QStandardItem *tmpItem[tmp.length()];
 
 
