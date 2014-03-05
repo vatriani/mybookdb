@@ -16,6 +16,7 @@ set(appMain
 	networkscanner.cpp
 	amazonsearch.cpp
 	uihelpers.cpp
+	ui/groupboxcollapse.cpp
 	ui/toolbargroups.cpp
 	ui/ratingbar.cpp
 	ui/overview.cpp
