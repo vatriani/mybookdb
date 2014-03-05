@@ -27,7 +27,7 @@
 
 /**
  * @brief The ratingbar class is an own widget for represent rating of a book
- * with 9 stars.
+ * with 10 stars.
  *
  * Rating is shown and could be changed with mousewheel.
  */
