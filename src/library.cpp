@@ -111,7 +111,9 @@ QList<QString> library::queryLinkedList(QString query)
 
 	return results;
 }
-
+/**
+ * @todo remove unused variable cols
+ */
 QString library::querySingle(QString query)
 {
 	sqlite3_stmt *statement;
@@ -140,6 +142,21 @@ QString library::querySingle(QString query)
 	return results;
 }
 
+bool library::queryInsert(QString)
+{
+	/** @todo Needs implementation */
+}
+
+bool library::queryUpdate(QString)
+{
+	/** @todo Needs implementation */
+}
+
+bool library::queryDelete(QString)
+{
+	/** @todo Needs implementation */
+}
+
 void library::close()
 {
 	sqlite3_close(this->db);
@@ -157,7 +174,7 @@ QList<QString> library::getBooksFromAuthorKey(QString authorKey)
 
 QList<QString> library::getBooksFromSeries(QString serie)
 {
-
+	/** @todo Needs implementation */
 }
 
 QList<QString> library::getAuthorsOfBook(QString bookKey)
@@ -167,6 +184,20 @@ QList<QString> library::getAuthorsOfBook(QString bookKey)
 	bookQuery.append("';");
 
 	return this->queryLinkedList(bookQuery);
+}
+
+void library::removeAuthor(QString authorText)
+{
+	QString query ="'";
+	query.append(authorText);
+	query.append("';");
+
+	this->queryDelete(query);
+}
+
+void library::addAuthorToBook(QString)
+{
+	/** @todo Needs implementation */
 }
 
 QList<QString> library::getGenresOfBook(QString bookKey)
