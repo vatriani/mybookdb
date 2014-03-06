@@ -49,11 +49,6 @@ public:
 	explicit groupBoxCollapse(QWidget *parent = 0);
 
 	/**
-	 * @brief Reimplement the OnClick on the title for collapse.
-	 */
-	void mouseReleaseEvent(QMouseEvent*);
-
-	/**
 	 * @brief Is triggered by expandig GroupBox.
 	 *
 	 * At now its recommend to add your widgets visability here in your class.
@@ -73,6 +68,10 @@ private:
 	 * @brief Helper routine to determine if GroupBox is collapse or expanding.
 	 */
 	void change();
+	/**
+	 * @brief Reimplement the OnClick on the title for collapse.
+	 */
+	void mouseReleaseEvent(QMouseEvent*);
 
 	/**
 	 * @brief Holds the collapse state of the GroupBox.
