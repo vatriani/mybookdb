@@ -3,12 +3,6 @@
 
 #include <QWidget>
 #include <QGroupBox>
-#include <QListView>
-#include <QPushButton>
-#include <QComboBox>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QSpacerItem>
 #include <QMouseEvent>
 
 class groupBoxCollapse : public QGroupBox
@@ -17,27 +11,12 @@ class groupBoxCollapse : public QGroupBox
 public:
 	explicit groupBoxCollapse(QWidget *parent = 0);
 
-	void addToChooser(QList<QString>);
-	void addToView(QList<QString>);
-
 	void mouseReleaseEvent(QMouseEvent*);
-
-signals:
-
-public slots:
-	void collapse();
+	void change();
+	virtual void expand();
+	virtual void collapse();
 
 private:
-
-
-	QListView *ListView;
-	QComboBox *ComboBoxChooser;
-	QPushButton *ButtonAdd;
-	QPushButton *ButtonRemove;
-	QPushButton *ButtonNew;
-	QSpacerItem *HorizontalSpacer;
-	QVBoxLayout *LayoutVertical;
-	QHBoxLayout *LayoutHorizontal;
 	bool isCollapse;
 };
 
