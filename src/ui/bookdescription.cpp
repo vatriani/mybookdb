@@ -69,11 +69,6 @@ void bookdescription::isbnScanner(QString tmp)
 	this->ui->lineEditISBN->setText(tmp);
 }
 
-/**
- * @brief bookdescription::openBook
- * language, description, serie, publisher, title, isbn, key
- * @param key Bookkey
- */
 void bookdescription::openBook(QString key)
 {
 	this->bookKey=key;
@@ -90,4 +85,34 @@ void bookdescription::openBook(QString key)
 	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[DB_BOOK_SERIE]));
 	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[DB_BOOK_LANGUAGE]));
 	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[DB_BOOK_PUBLISHER]));
+}
+
+void bookdescription::addAuthor(QString)
+{
+	/** @todo Needs implementation */
+}
+
+void bookdescription::removeAuthor(QString)
+{
+	/** @todo Needs implementation */
+}
+
+void bookdescription::addGenre(QString)
+{
+	/** @todo Needs implementation */
+}
+
+void bookdescription::removeGenre(QString)
+{
+	/** @todo Needs implementation */
+}
+
+void bookdescription::addKeyword(QString)
+{
+	/** @todo Needs implementation */
+}
+
+void bookdescription::removeKeyword(QString)
+{
+	/** @todo Needs implementation */
 }

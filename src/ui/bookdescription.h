@@ -29,6 +29,9 @@
 
 #include "ratingbar.h"
 
+/**
+ * @brief Namespace for generated GUI widgets from QtDesigner.
+ */
 namespace Ui {
 class bookdescription;
 }
@@ -46,8 +49,20 @@ public slots:
 	void inputIsbn(QString);
 	void resetIsbn();
 	void isbnScanner(QString);
-
+	/**
+	 * @brief bookdescription::openBook
+	 * language, description, serie, publisher, title, isbn, key
+	 * @param key Bookkey
+	 */
 	void openBook(QString);
+
+private slots:
+	void addAuthor(QString);
+	void removeAuthor(QString);
+	void addGenre(QString);
+	void removeGenre(QString);
+	void addKeyword(QString);
+	void removeKeyword(QString);
 
 private:
 	Ui::bookdescription *ui;
