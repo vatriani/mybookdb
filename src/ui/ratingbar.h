@@ -16,6 +16,11 @@
  * @author	Niels Neumann <vatriani.nn@googlemail.com>
  * @version 1.0
  */
+
+/**
+ * @addtogroup GUIW Custom GUI widgets
+ * @{
+ */
 #ifndef RATINGBAR_H
 #define RATINGBAR_H
 
@@ -89,3 +94,6 @@ private:
 };
 
 #endif // RATINGBAR_H
+/**
+ * @}
+ */

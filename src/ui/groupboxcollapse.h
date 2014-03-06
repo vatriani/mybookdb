@@ -18,7 +18,7 @@
  */
 
 /**
- * @addtogroup GUIW Custom gui widgets.
+ * @addtogroup GUIW Custom GUI widgets
  * @{
  */
 
