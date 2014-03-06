@@ -2,10 +2,12 @@
 
 #include "../uihelpers.h"
 
+#include <QDebug>
+
 fieldManager::fieldManager(QWidget *parent) :
 	groupBoxCollapse(parent)
 {
-	this->model = NULL;
+	this->itemModel = NULL;
 
 	this->LayoutVertical = new QVBoxLayout(this);
 	this->LayoutHorizontal = new QHBoxLayout();
@@ -13,21 +15,32 @@ fieldManager::fieldManager(QWidget *parent) :
 	this->ListView = new QListView(this);
 	this->ButtonAdd = new QPushButton(tr("add"),this);
 	this->ButtonRemove = new QPushButton(tr("remove"),this);
-	this->ButtonNew = new QPushButton(tr("new"),this);
 	this->ComboBoxChooser = new QComboBox(this);
+	this->ComboBoxChooser->setEditable(true);
 
 	this->LayoutHorizontal->addWidget(this->ComboBoxChooser);
+	this->LayoutHorizontal->addSpacerItem(this->HorizontalSpacer);
 	this->LayoutHorizontal->addWidget(this->ButtonAdd);
 	this->LayoutHorizontal->addWidget(this->ButtonRemove);
-	this->LayoutHorizontal->addSpacerItem(this->HorizontalSpacer);
-	this->LayoutHorizontal->addWidget(this->ButtonNew);
 
 	this->LayoutVertical->addWidget(this->ListView);
 	this->LayoutVertical->addLayout(LayoutHorizontal);
 
 	connect(this->ButtonAdd,SIGNAL(clicked()),this,SLOT(addButtonClicked()));
-	connect(this->ButtonNew,SIGNAL(clicked()),this,SLOT(newButtonClicked()));
 	connect(this->ButtonRemove,SIGNAL(clicked()),this,SLOT(removeButtonClicked()));
+}
+
+fieldManager::~fieldManager()
+{
+
+	delete this->ComboBoxChooser;
+	delete this->ButtonAdd;
+	delete this->ButtonRemove;
+	if(this->itemModel != NULL)
+		delete this->itemModel;
+	delete this->ListView;
+	delete this->LayoutHorizontal;
+	delete this->LayoutVertical;
 }
 
 void fieldManager::addToChooser(QList<QString> tmpList)
@@ -37,39 +50,48 @@ void fieldManager::addToChooser(QList<QString> tmpList)
 
 void fieldManager::addToView(QList<QString> tmpList)
 {
-	if(this->model != NULL)
-		delete this->model;
-	this->model=new QStandardItemModel(getItemModelFromList(tmpList));
-	this->ListView->setModel(this->model);
+	if(this->itemModel != NULL)
+	{
+		this->ListView->setModel(NULL);
+		delete this->itemModel;
+		this->itemModel = NULL;
+	}
+
+	this->itemModel = getItemModelFromList(tmpList);
+	this->ListView->setModel(this->itemModel);
 }
 
 void fieldManager::addButtonClicked()
 {
+	if(this->itemModel == NULL)
+	{
+		this->itemModel = new QStandardItemModel();
+		this->ListView->setModel(this->itemModel);
+	}
+
 	QStandardItem *tmp = new QStandardItem(this->ComboBoxChooser->currentText());
-	this->model->appendRow(tmp);
-	delete tmp;
+	this->itemModel->appendRow(tmp);
+
+	emit this->valueAdded(this->ComboBoxChooser->currentText());
 }
 
 void fieldManager::removeButtonClicked()
 {
+	QItemSelectionModel *selectionModel = this->ListView->selectionModel();
+	QModelIndexList indexes = selectionModel->selectedIndexes();
+	QModelIndex index;
 
-}
-
-void fieldManager::newButtonClicked()
-{
-
-}
-
-void fieldManager::chooserComboBoxCommit()
-{
-
+	foreach(index, indexes)
+	{
+		emit this->valueRemoved(this->itemModel->data(index).toString());
+		this->itemModel->removeRow(index.row());
+	}
 }
 
 void fieldManager::expand()
 {
 	this->ListView->setVisible(true);
 	this->ButtonAdd->setVisible(true);
-	this->ButtonNew->setVisible(true);
 	this->ButtonRemove->setVisible(true);
 	this->ComboBoxChooser->setVisible(true);
 }
@@ -78,7 +100,6 @@ void fieldManager::collapse()
 {
 	this->ListView->setVisible(false);
 	this->ButtonAdd->setVisible(false);
-	this->ButtonNew->setVisible(false);
 	this->ButtonRemove->setVisible(false);
 	this->ComboBoxChooser->setVisible(false);
 }

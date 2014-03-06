@@ -17,17 +17,18 @@ class fieldManager : public groupBoxCollapse
 	Q_OBJECT
 public:
 	explicit fieldManager(QWidget *parent = 0);
+	~fieldManager();
 
 	void addToChooser(QList<QString>);
 	void addToView(QList<QString>);
 
 signals:
+	void valueAdded(QString);
+	void valueRemoved(QString);
 
 private slots:
 	void addButtonClicked();
 	void removeButtonClicked();
-	void newButtonClicked();
-	void chooserComboBoxCommit();
 
 private:
 	void expand();
@@ -37,11 +38,10 @@ private:
 	QComboBox *ComboBoxChooser;
 	QPushButton *ButtonAdd;
 	QPushButton *ButtonRemove;
-	QPushButton *ButtonNew;
 	QSpacerItem *HorizontalSpacer;
 	QVBoxLayout *LayoutVertical;
 	QHBoxLayout *LayoutHorizontal;
-	QStandardItemModel *model;
+	QStandardItemModel *itemModel;
 };
 
 #endif // FIELDMANAGER_H
