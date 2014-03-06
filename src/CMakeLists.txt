@@ -19,6 +19,7 @@ set(appMain
 	ui/groupboxcollapse.cpp
 	ui/toolbargroups.cpp
 	ui/ratingbar.cpp
+	ui/fieldmanager.cpp
 	ui/overview.cpp
 	ui/bookdescription.cpp
 	ui/mainwindow.cpp

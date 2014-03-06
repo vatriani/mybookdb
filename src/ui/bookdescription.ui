@@ -94,7 +94,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="general">
       <attribute name="title">
@@ -115,7 +115,16 @@
             <item>
              <widget class="QLabel" name="Cover">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../res/ressources.qrc">:/main/nocover_book.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>false</bool>
+              </property>
+              <property name="textInteractionFlags">
+               <set>Qt::NoTextInteraction</set>
               </property>
              </widget>
             </item>
@@ -188,7 +197,11 @@
             <widget class="QComboBox" name="comboBoxLanguage"/>
            </item>
            <item row="0" column="1" colspan="3">
-            <widget class="QDateEdit" name="dateEdit"/>
+            <widget class="QDateEdit" name="dateEdit">
+             <property name="currentSection">
+              <enum>QDateTimeEdit::DaySection</enum>
+             </property>
+            </widget>
            </item>
            <item row="1" column="1" colspan="3">
             <widget class="QComboBox" name="comboBoxPublisher">
@@ -212,14 +225,14 @@
         </layout>
        </item>
        <item>
-        <widget class="groupBoxCollapse" name="groupBoxAuthors">
+        <widget class="fieldManager" name="groupBoxAuthors">
          <property name="title">
           <string>Authors:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="groupBoxCollapse" name="groupBoxGenre">
+        <widget class="fieldManager" name="groupBoxGenre">
          <property name="title">
           <string>Genre:</string>
          </property>
@@ -432,12 +445,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>groupBoxCollapse</class>
+   <class>fieldManager</class>
    <extends>QGroupBox</extends>
-   <header>ui/groupboxcollapse.h</header>
+   <header>ui/fieldmanager.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../res/ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>
