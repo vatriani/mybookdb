@@ -24,15 +24,15 @@ library::library(QObject *parent) :
 
 	this->open(string.data());
 	querySingle("CREATE TABLE IF NOT EXISTS author (authors NUMERIC, book NUMERIC);");
-	querySingle("CREATE TABLE IF NOT EXISTS authors (name TEXT, key INTEGER PRIMARY KEY);");
+	querySingle("CREATE TABLE IF NOT EXISTS authors (name TEXT UNIQUE, key INTEGER PRIMARY KEY);");
 	querySingle("CREATE TABLE IF NOT EXISTS book (pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, key INTEGER PRIMARY KEY);");
-	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
 	querySingle("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");
 	querySingle("CREATE TABLE IF NOT EXISTS keyword (keywords NUMERIC, book NUMERIC);");
-	querySingle("CREATE TABLE IF NOT EXISTS keywords (key INTEGER PRIMARY KEY, name TEXT);");
-	querySingle("CREATE TABLE IF NOT EXISTS languages (key INTEGER PRIMARY KEY, name TEXT);");
-	querySingle("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT);");
-	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE TABLE IF NOT EXISTS keywords (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
+	querySingle("CREATE TABLE IF NOT EXISTS languages (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
+	querySingle("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
+	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
 }
 
 library::~library()
