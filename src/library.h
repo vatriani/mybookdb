@@ -18,7 +18,7 @@
  */
 
 /**
- * @addtogroup NGUI non GUI classes
+ * @addtogroup NGUI Non GUI classes
  * @{
  */
 #ifndef LIBRARY_H
@@ -82,7 +82,11 @@
  * @}
  */
 
-
+/**
+ * @brief Enumerating table fields from db.
+ *
+ * Only for developing and make new cols to table easier.
+ */
 enum {
 	DB_BOOK_RATING = 0,
 	DB_BOOK_PAGES,

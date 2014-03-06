@@ -24,7 +24,7 @@
 #include <QtNetwork/QTcpServer>
 
 /**
- * @addtogroup NGUI non GUI classes
+ * @addtogroup NGUI Non GUI classes
  * @{
  */
 
