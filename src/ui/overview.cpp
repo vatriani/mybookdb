@@ -10,11 +10,8 @@ overview::overview(QWidget *parent) :
 	ui(new Ui::overview)
 {
 	ui->setupUi(this);
-
 	ui->treeView->setStyleSheet("QTreeView::branch:has-children:!has-siblings:closed, QTreeView::branch:closed:has-children:has-siblings { border-image: none; image: url(:/toolbar/rightarrow.png); } QTreeView::branch:open:has-children:!has-siblings, QTreeView::branch:open:has-children:has-siblings  { border-image: none; image: url(:/toolbar/downarrow.png);}");
 
-	ui->tab->setWindowIcon(QIcon());
-	ui->tab_2->setWindowIcon(QIcon(":/toolbar/filter.png"));
 	this->ui->dockWidgetContents->setWindowFlags(Qt::SubWindow);
 
 	this->listview = new QStandardItemModel(this);
@@ -41,22 +38,27 @@ void overview::buildTree()
 	QList<QList<QString> > tmp =_library->getAllAuthorsWithKey();
 	QStandardItem *tmpItem[tmp.length()];
 
-
 	for(int counter=0; counter<tmp.length(); counter++) {
-		tmpItem[counter] = new QStandardItem(tmp[counter][0]);
-		tmpItem[counter]->setIcon(QIcon(":/main/person.png"));
+		if(tmp[counter][0] != 0)
+		{
+			tmpItem[counter] = new QStandardItem(tmp[counter][0]);
+			tmpItem[counter]->setIcon(QIcon(":/main/person.png"));
 
-		QList<QString> tmpBooks = _library->getBooksFromAuthorKey(tmp[counter][1]);
+			QList<QString> tmpBooks = _library->getBooksFromAuthorKey(tmp[counter][1]);
 
-		QStandardItem *tmpItemBooks[tmpBooks.length()];
+			QStandardItem *tmpItemBooks[tmpBooks.length()];
 
-		for(int counterB=0; counterB<tmpBooks.length(); counterB++) {
-			tmpItemBooks[counterB] = new QStandardItem(tmpBooks[counterB]);
-			tmpItemBooks[counterB]->setIcon(QIcon(":/main/book.png"));
-			tmpItem[counter]->appendRow(tmpItemBooks[counterB]);
+			for(int counterB=0; counterB<tmpBooks.length(); counterB++) {
+				if(tmpBooks[counter].length() != 0)
+				{
+					tmpItemBooks[counterB] = new QStandardItem(tmpBooks[counterB]);
+					tmpItemBooks[counterB]->setIcon(QIcon(":/main/book.png"));
+					tmpItem[counter]->appendRow(tmpItemBooks[counterB]);
+				}
+			}
+
+			this->listview->appendRow(tmpItem[counter]);
 		}
-
-		this->listview->appendRow(tmpItem[counter]);
 	}
 
 	this->listview->sort(0);
