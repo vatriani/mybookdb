@@ -8,8 +8,9 @@ function(git_get_commit_version _var)
 		if(UNIX)
 				execute_process(COMMAND git log -n1 HEAD
 						COMMAND head -n1
-						COMMAND cut -b8-50
-						OUTPUT_VARIABLE _output_git)
+						COMMAND cut -b8-47
+						OUTPUT_VARIABLE _output_git
+						OUTPUT_STRIP_TRAILING_WHITESPACE)
 		endif()
 		set(${_var} ${_output_git} PARENT_SCOPE)
 endfunction()
