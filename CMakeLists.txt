@@ -3,18 +3,14 @@ cmake_minimum_required(VERSION 2.8.9)
 
 # Configure section
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-#include(GetGitRevisionDescription)
-include(GetGitCommitVersion)
-#git_describe(VERSION --tags --dirty=-beta)
-git_get_commit_version(VERSION_COMMIT)
-
-#parse the version information into pieces.
-#string(REGEX REPLACE "^v([0-9]+)\\..*" "\\1" VERSION_MAJOR "${VERSION}")
-#string(REGEX REPLACE "^v[0-9]+\\.([0-9]+).*" "\\1" VERSION_MINOR "${VERSION}")
-#string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" VERSION_PATCH "${VERSION}")
-#string(REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+(.*)" "\\1" VERSION_SHA1 "${VERSION}")
-
-#set(VERSION_SHORT "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+include(FindGit)
+if(GIT_FOUND)
+	GIT_WC_INFO(${PROJECT_SOURCE_DIR} mybookdb)
+	execute_process(COMMAND ${GIT_EXECUTABLE} describe
+	OUTPUT_VARIABLE VERSION
+	OUTPUT_STRIP_TRAILING_WHITESPACE)
+	message("-- git project version: " ${VERSION})
+endif()
 
 configure_file(version.h.in ${CMAKE_BINARY_DIR}/version.h)
 

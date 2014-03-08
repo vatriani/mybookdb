@@ -20,7 +20,7 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define APP_VERSION "@VERSION_COMMIT@"
+#define APP_VERSION "@VERSION@"
 /** Holds the version string from git version. */
 
 static const char *APP_NAME = "mybookdb";
