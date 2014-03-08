@@ -39,6 +39,9 @@ set_target_properties(Qt5::Core PROPERTIES MAP_IMPORTED_CONFIG_COVERAGE "RELEASE
 #add_subdirectory(lib/sqlite3)
 #include_directories("lib/sqlite3")
 
+add_subdirectory(translation)
+include_directories("translation")
+
 add_subdirectory(lib/aws)
 include_directories("lib/aws")
 

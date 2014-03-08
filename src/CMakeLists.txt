@@ -1,5 +1,4 @@
 include_directories(${CMAKE_BINARY_DIR})
-message(STATUS ${CMAKE_BINARY_DIR})
 
 # qt ui files
 QT5_WRAP_UI(UIS_HDRS
@@ -28,7 +27,7 @@ set(appMain
 qt5_add_resources(RES_OUT ../res/ressources.qrc)
 
 
-add_executable(mybookdb ${appMain} ${UIS_HDRS} qrc_ressources.cpp)
+add_executable(mybookdb ${appMain} ${UIS_HDRS} qrc_ressources.cpp ${TRANSLATIONS})
 
 include(CheckCXXCompilerFlag)
 
