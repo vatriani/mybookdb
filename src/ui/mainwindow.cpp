@@ -136,7 +136,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::showVersion()
 {
-	QMessageBox(QMessageBox::Information,"About MyBookDB","MyBookDB Version ",QMessageBox::Ok);
+	QString version = tr("Version: ");
+	version.append(APP_VERSION);
+	QMessageBox::information(this,tr("About MyBookDB"),version,QMessageBox::Ok);
 }
 
 void MainWindow::showQt()
