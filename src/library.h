@@ -29,7 +29,6 @@
 #include <QList>
 
 #include "sqlite3.h"
-#include "version.h"
 
 /**
  * @defgroup DB Database Structure

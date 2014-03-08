@@ -1,4 +1,6 @@
 #include "library.h"
+#include "version.h"
+
 
 #include <QSettings>
 #include <QMessageBox>
