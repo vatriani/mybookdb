@@ -14,7 +14,9 @@ fieldManager::fieldManager(QWidget *parent) :
 	this->HorizontalSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
 	this->ListView = new QListView(this);
 	this->ButtonAdd = new QPushButton(tr("add"),this);
+	this->ButtonAdd->setIcon(QIcon(":/toolbar/edit_add.png"));
 	this->ButtonRemove = new QPushButton(tr("remove"),this);
+	this->ButtonRemove->setIcon(QIcon(":/toolbar/editdelete.png"));
 	this->ComboBoxChooser = new QComboBox(this);
 	this->ComboBoxChooser->setEditable(true);
 
