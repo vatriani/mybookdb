@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+#include "../imagestore.h"
 #include <QMessageBox>
 #include <QApplication>
 #include <QString>
@@ -14,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	this->NetworkScanner = NULL;
 
 	_library = new library(this);
+	_imagestore = new imagestore(this);
 	createUi();
 	readConfig();
 }
@@ -32,6 +35,7 @@ MainWindow::~MainWindow()
 		delete this->BookDescription;
 
 	delete _library;
+	delete _imagestore;
 	delete ui;
 
 	if(this->NetworkScanner)
