@@ -1,6 +1,6 @@
 /**
  * @file groupboxcollapse.h
- * @brief Class for lSQL handling.
+ * @brief Define a collapseable groupbox widget.
  * @copyright
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

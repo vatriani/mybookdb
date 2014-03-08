@@ -1,6 +1,6 @@
 /**
  * @file ratingbar.h
- * @brief Own widget with 9 stars to represent rating of a book.
+ * @brief Own widget with 10 stars to represent rating of a book.
  * @copyright
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

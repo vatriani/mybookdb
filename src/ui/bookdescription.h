@@ -1,6 +1,6 @@
 /**
  * @file bookdescription.h
- * @brief
+ * @brief Gui widget for displaying and editing book details.
  * @copyright
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

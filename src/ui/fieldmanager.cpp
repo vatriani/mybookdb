@@ -1,3 +1,29 @@
+/**
+ * @file fieldmanager.cpp
+ * @brief Gui widget to display a QListView with editing options.
+ *
+ * Editing is provided by choosing an value or enter a new one over QComboBox
+ * and clicking on the add Button. To remove an entry, select the value in
+ * ListView and clicking the remove Button.
+ *
+ * @copyright
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @author	Niels Neumann <vatriani.nn@googlemail.com>
+ * @version 1.0
+ */
+
+
+
 #include "fieldmanager.h"
 
 #include "../uihelpers.h"
