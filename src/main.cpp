@@ -18,9 +18,13 @@
  */
 
 
+
 #include "ui/mainwindow.h"
+#include "version.h"
 #include <QApplication>
 #include <QTranslator>
+#include <QCommandLineParser>
+
 
 
 /**
@@ -31,8 +35,17 @@
 int main(int argc, char** argv)
 {
 	QApplication app(argc, argv);
-	QTranslator translator;
+	QCoreApplication::setApplicationName(APP_NAME);
+	QCoreApplication::setApplicationVersion(APP_VERSION);
 
+	QCommandLineParser parser;
+	parser.setApplicationDescription("Programm to manage and view your book collection at home.");
+	parser.addHelpOption();
+	parser.addVersionOption();
+
+	parser.process(app);
+
+	QTranslator translator;
 	//translator.load("hellotr_la");
 	app.installTranslator(&translator);
 
@@ -41,4 +54,3 @@ int main(int argc, char** argv)
 
 	return app.exec();
 }
-
