@@ -15,6 +15,7 @@ set(appMain
 	isbn.cpp
 	networkscanner.cpp
 	amazonsearch.cpp
+	imagestore.cpp
 	uihelpers.cpp
 	ui/groupboxcollapse.cpp
 	ui/toolbargroups.cpp
