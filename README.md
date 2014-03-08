@@ -1,6 +1,12 @@
 This programm manage your book collection and fetches some informations about
 books in your libary.
 
+Checkout http://vatriani.github.io/mybookdb for project webpage.
+
+
+### status
+The programm is actually under development and some basic usage functions didn't work. So it's in alpha state.
+
 
 # Checkout
 
