@@ -20,13 +20,13 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define APP_VERSION "@VERSION@"
 /** Holds the version string from git version. */
+static const char *APP_VERSION = "@VERSION@";
 
-static const char *APP_NAME = "mybookdb";
 /** Holds application name */
+static const char *APP_NAME = "mybookdb";
 
-static const char *APP_CONFIG = "config";
 /** Holds config file name */
+static const char *APP_CONFIG = "config";
 
 #endif
