@@ -1,11 +1,10 @@
 project(mybookdb)
 cmake_minimum_required(VERSION 2.8.9)
 
-# Configure section
+# getting git version
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(FindGit)
 if(GIT_FOUND)
-	GIT_WC_INFO(${PROJECT_SOURCE_DIR} mybookdb)
 	execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags
 	OUTPUT_VARIABLE VERSION
 	OUTPUT_STRIP_TRAILING_WHITESPACE)
