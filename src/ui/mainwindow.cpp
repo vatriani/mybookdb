@@ -28,7 +28,6 @@ MainWindow::~MainWindow()
 	delete this->ActionPrint;
 	delete this->ActionSearch;
 	delete this->ActionShowAll;
-	delete this->ToolBarGroups;
 	delete this->ToolBar;
 	delete this->OverView;
 	if(this->BookDescription)
@@ -56,8 +55,6 @@ void MainWindow::createUi()
 	this->ActionBarcodeScanner = new QAction(QIcon(":/toolbar/barcode.png"), tr("Scan from Barcode"), this);
 	this->ActionBarcodeScanner->setCheckable(true);
 
-	this->ToolBarGroups = new toolbargroups(this);
-
 	this->ToolBar = new QToolBar(this);
 	this->ToolBar->addAction(this->ActionNew);
 	this->ToolBar->addAction(this->ActionSave);
@@ -66,8 +63,6 @@ void MainWindow::createUi()
 	this->ToolBar->addAction(this->ActionSearch);
 	this->ToolBar->addAction(this->ActionShowAll);
 	this->ToolBar->addAction(this->ActionBarcodeScanner);
-	this->ToolBar->addSeparator();
-	this->ToolBar->addWidget(this->ToolBarGroups);
 	this->ToolBar->setWindowTitle(tr("Main ToolBar"));
 	this->addToolBar(ToolBar);
 

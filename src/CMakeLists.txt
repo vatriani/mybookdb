@@ -6,7 +6,6 @@ QT5_WRAP_UI(UIS_HDRS
 	ui/mainwindow.ui
 	ui/overview.ui
 	ui/bookdescription.ui
-	ui/toolbargroups.ui
 )
 
 
@@ -18,7 +17,6 @@ set(appMain
 	imagestore.cpp
 	uihelpers.cpp
 	ui/groupboxcollapse.cpp
-	ui/toolbargroups.cpp
 	ui/ratingbar.cpp
 	ui/fieldmanager.cpp
 	ui/overview.cpp

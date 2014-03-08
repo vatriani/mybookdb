@@ -28,7 +28,6 @@
 
 #include "overview.h"
 #include "bookdescription.h"
-#include "toolbargroups.h"
 
 #include "../library.h"
 #include "../networkscanner.h"
@@ -61,7 +60,6 @@ private:
 
 	overview *OverView;
 	bookdescription *BookDescription;
-	toolbargroups *ToolBarGroups;
 
 	void createUi();
 	void readConfig();
