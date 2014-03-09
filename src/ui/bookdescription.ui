@@ -94,7 +94,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="general">
       <attribute name="title">
@@ -283,17 +283,33 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_9">
+         <item row="3" column="2">
+          <widget class="QLabel" name="label_14">
            <property name="text">
-            <string>Added date:</string>
+            <string>Format:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_10">
+         <item row="3" column="3">
+          <widget class="QComboBox" name="comboBoxFormat"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_16">
            <property name="text">
-            <string>Translated:</string>
+            <string>Comments:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="3">
+          <widget class="QDateEdit" name="dateEditBuyingDate"/>
+         </item>
+         <item row="5" column="1" colspan="3">
+          <widget class="QPlainTextEdit" name="plainTextEditDescription"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Buying date:</string>
            </property>
           </widget>
          </item>
@@ -307,8 +323,25 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
-          <widget class="QLineEdit" name="lineEditTranslator"/>
+         <item row="0" column="1" colspan="3">
+          <widget class="QDateEdit" name="dateEditAddedDate"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Added date:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Translation:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lineEditPrintVersion"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_12">
@@ -324,41 +357,8 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEditPrintVersion"/>
-         </item>
-         <item row="3" column="2">
-          <widget class="QLabel" name="label_14">
-           <property name="text">
-            <string>Format:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="QComboBox" name="comboBoxFormat"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_15">
-           <property name="text">
-            <string>Buying date:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_16">
-           <property name="text">
-            <string>Comments:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="3">
-          <widget class="QDateEdit" name="dateEditBuyingDate"/>
-         </item>
-         <item row="0" column="1" colspan="3">
-          <widget class="QDateEdit" name="dateEditAddedDate"/>
-         </item>
-         <item row="5" column="1" colspan="3">
-          <widget class="QPlainTextEdit" name="plainTextEditDescription"/>
+         <item row="1" column="3">
+          <widget class="QComboBox" name="comboBoxTranslator"/>
          </item>
         </layout>
        </item>
@@ -414,28 +414,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QListView" name="listViewMarks"/>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QComboBox" name="comboBox_2"/>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="fieldManager" name="groupBox">
+         <property name="title">
+          <string>Marks</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
