@@ -46,16 +46,29 @@ library::library(QObject *parent) :
 	QByteArray string = dbFile.toLocal8Bit();
 
 	this->open(string.data());
-	querySingle("CREATE TABLE IF NOT EXISTS author (authors NUMERIC, book NUMERIC);");
-	querySingle("CREATE TABLE IF NOT EXISTS authors (name TEXT UNIQUE, key INTEGER PRIMARY KEY);");
-	querySingle("CREATE TABLE IF NOT EXISTS book (pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, key INTEGER PRIMARY KEY);");
-	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
+	querySingle("CREATE TABLE IF NOT EXISTS authors (author NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS author (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS author_index ON author(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS book (key INTEGER PRIMARY KEY, pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, publish_date TEXT, readed NUMERIC, added_date TEXT, translation NUMERIC, print_version NUMERIC, format NUMERIC, buying_date TEXT, comments TEXT, my_favorit NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS genre_index ON genre(name ASC);");
 	querySingle("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");
-	querySingle("CREATE TABLE IF NOT EXISTS keyword (keywords NUMERIC, book NUMERIC);");
-	querySingle("CREATE TABLE IF NOT EXISTS keywords (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
-	querySingle("CREATE TABLE IF NOT EXISTS languages (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
-	querySingle("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
-	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT UNIQUE);");
+	querySingle("CREATE TABLE IF NOT EXISTS keywords (keyword NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS keyword (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS keyword_index ON keyword(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS language (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS languages_index ON language(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS publisher (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS publisher_index ON publisher(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS serie (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS serie_index ON serie(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS marks (mark NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS mark (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS mark_index ON mark(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS translators (translator NUMERIC, book NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS translator (key INTEGER PRIMARY KEY, name TEXT);");
+	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS translator_index ON translator(name ASC);");
+	querySingle("CREATE TABLE IF NOT EXISTS rent (key INTEGER PRIMARY KEY, user TEXT, book NUMERIC, rent_date TEXT, back_date TEXT);");
 }
 
 library::~library()
@@ -189,7 +202,7 @@ void library::close()
 
 QList<QString> library::getBooksFromAuthorKey(QString authorKey)
 {
-	QString booktitle = "SELECT book.title FROM book JOIN author ON author.book = book.key WHERE author.authors LIKE '";
+	QString booktitle = "SELECT book.title FROM book JOIN authors ON authors.book = book.key WHERE authors.author LIKE '";
 	booktitle.append(authorKey);
 	booktitle.append("' ORDER BY book.title;");
 	return this->queryLinkedList(booktitle);
@@ -202,7 +215,7 @@ QList<QString> library::getBooksFromSeries(QString serie)
 
 QList<QString> library::getAuthorsOfBook(QString bookKey)
 {
-	QString bookQuery ="SELECT authors.name FROM authors JOIN author ON authors.key = author.authors WHERE author.book LIKE '";
+	QString bookQuery ="SELECT author.name FROM author JOIN authors ON author.key = authors.author WHERE authors.book LIKE '";
 	bookQuery.append(bookKey);
 	bookQuery.append("';");
 
@@ -251,7 +264,7 @@ QString library::getBookKeyByTitle(QString title)
 
 QList<QString> library::getAllLanguages()
 {
-	return this->queryLinkedList("SELECT name FROM languages;");
+	return this->queryLinkedList("SELECT name FROM language;");
 }
 
 QList<QString> library::getAllGenres()
@@ -261,12 +274,12 @@ QList<QString> library::getAllGenres()
 
 QList<QString> library::getAllAuthors()
 {
-	return this->queryLinkedList("SELECT name FROM authors;");
+	return this->queryLinkedList("SELECT name FROM author;");
 }
 
 QList<QList<QString> > library::getAllAuthorsWithKey()
 {
-	return this->query2LinkedLists("SELECT * FROM authors;");
+	return this->query2LinkedLists("SELECT * FROM author;");
 }
 
 QList<QString> library::getAllPublishers()
@@ -289,7 +302,7 @@ QString library::getSerieNameFromKey(QString key)
 
 QString library::getLanguageFromKey(QString key)
 {
-	QString bookKey = "SELECT name FROM languages WHERE key LIKE '";
+	QString bookKey = "SELECT name FROM language WHERE key LIKE '";
 	bookKey.append(key);
 	bookKey.append("';");
 	return this->querySingle(bookKey);
