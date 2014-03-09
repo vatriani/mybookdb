@@ -15,6 +15,7 @@ set(appMain
 	amazonsearch.cpp
 	imagestore.cpp
 	uihelpers.cpp
+	ui/datechooser.cpp
 	ui/groupboxcollapse.cpp
 	ui/ratingbar.cpp
 	ui/fieldmanager.cpp
