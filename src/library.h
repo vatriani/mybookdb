@@ -27,6 +27,7 @@
 #include <QObject>
 #include <QString>
 #include <QList>
+#include <QStringList>
 
 #include "sqlite3.h"
 
@@ -115,7 +116,32 @@ enum {
 	DB_BOOK_FAVORIT,
 	DB_BOOK_IMAGE,
 	DB_BOOK_RATING,
+	DB_BOOK_SERIENO,
+	DB_BOOK_COUNT,
 };
+
+/**
+ * @brief enumerating for QStringList fields for get the right translation.
+ */
+enum {
+	BOOK_KIND_PAPERBACK,
+	BOOK_KIND_HARDCOVER,
+	BOOK_KIND_GRIDLEBOOK,
+	BOOK_KIND_ONDEMAND,
+	BOOK_KIND_SOFTCOVER,
+	BOOK_KIND_E_BOOK,
+	BOOK_KIND_FAKSIMILE,
+	BOOK_KIND_CODEX,
+	BOOK_KIND_LOOSELEAF,
+	BOOK_KIND_MINIATURE,
+	BOOK_KIND_CONCESSIONAL,
+	BOOK_KIND_COUNT,
+};
+
+/**
+ * @brief _book_kind holds Translateable strings for book art.
+ */
+extern QStringList _book_kind;
 
 /**
  * @brief Handles db querys and db connection.
@@ -152,7 +178,6 @@ public:
 	 * @see queryLinkedList(QString)
 	 */
 	QList<QString> getBooksFromSeries(QString);
-
 	QList<QString> getGenresOfBook(QString);
 	/**
 	 * @brief Returns all values from the given book of the book-table.
@@ -168,7 +193,6 @@ public:
 	 * @see querySingle(QString)
 	 */
 	QString getBookKeyByTitle(QString);
-
 	QList<QString> getAllLanguages();
 	QList<QString> getAllGenres();
 	/**
@@ -189,10 +213,8 @@ public:
 	QList<QString> getAuthorsOfBook(QString);
 	void removeAuthor(QString);
 	void addAuthorToBook(QString);
-
 	QList<QString> getAllPublishers();
 	QList<QString> getAllCollections();
-
 	QString getSerieNameFromKey(QString);
 	QString getLanguageFromKey(QString);
 	QString getPublisherFromKey(QString);

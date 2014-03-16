@@ -33,6 +33,8 @@
 
 
 
+QStringList _book_kind;
+
 library *_library = NULL;
 
 library::library(QObject *parent) :
@@ -49,7 +51,7 @@ library::library(QObject *parent) :
 	querySingle("CREATE TABLE IF NOT EXISTS authors (author NUMERIC, book NUMERIC);");
 	querySingle("CREATE TABLE IF NOT EXISTS author (key INTEGER PRIMARY KEY, name TEXT);");
 	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS author_index ON author(name ASC);");
-	querySingle("CREATE TABLE IF NOT EXISTS book (key INTEGER PRIMARY KEY, pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, publish_date TEXT, readed NUMERIC, added_date TEXT, translation NUMERIC, print_version NUMERIC, format NUMERIC, buying_date TEXT, comments TEXT, my_favorit NUMERIC, image TEXT, rating : NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS book (key INTEGER PRIMARY KEY, pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, publish_date TEXT, readed NUMERIC, added_date TEXT, translation NUMERIC, print_version NUMERIC, format NUMERIC, buying_date TEXT, comments TEXT, my_favorit NUMERIC, image TEXT, rating NUMERIC);");
 	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
 	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS genre_index ON genre(name ASC);");
 	querySingle("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");
@@ -69,6 +71,11 @@ library::library(QObject *parent) :
 	querySingle("CREATE TABLE IF NOT EXISTS translator (key INTEGER PRIMARY KEY, name TEXT);");
 	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS translator_index ON translator(name ASC);");
 	querySingle("CREATE TABLE IF NOT EXISTS rent (key INTEGER PRIMARY KEY, user TEXT, book NUMERIC, rent_date TEXT, back_date TEXT);");
+
+	_book_kind << tr("paperback") << tr("hardcover") << tr("grindle book")
+			   << tr("on-demand book") << tr("soft cover") <<  tr("e-book")
+			   << tr("faksimile") << tr("codex") << tr("loose leaf book")
+			   << tr("miniature book") << tr("concessional release");
 }
 
 library::~library()
@@ -93,8 +100,8 @@ QList<QList<QString> > library::query2LinkedLists(QString query)
 
 	if(sqlite3_prepare_v2(this->db, query.toLocal8Bit(), -1, &statement, 0) == SQLITE_OK)
 	{
-		int cols = sqlite3_column_count(statement);
-		int result = 0;
+		register int cols = sqlite3_column_count(statement);
+		register int result = 0;
 		while(true)
 		{
 			result = sqlite3_step(statement);
@@ -102,7 +109,7 @@ QList<QList<QString> > library::query2LinkedLists(QString query)
 			if(result == SQLITE_ROW)
 			{
 				QList<QString> values;
-				for(int col = 0; col < cols; col++)
+				for(register int col = 0; col < cols; col++)
 					values.push_back((char*)sqlite3_column_text(statement, col));
 				results.push_back(values);
 			}
@@ -127,13 +134,13 @@ QList<QString> library::queryLinkedList(QString query)
 	if(sqlite3_prepare_v2(this->db, query.toLocal8Bit(), -1, &statement, 0) == SQLITE_OK)
 	{
 		int cols = sqlite3_column_count(statement);
-		int result = 0;
+		register int result = 0;
 		while(true)
 		{
 			result = sqlite3_step(statement);
 
 			if(result == SQLITE_ROW)
-				for(int counter = 0; counter<cols;counter++)
+				for(register int counter = 0; counter<cols;counter++)
 					results.push_back(QString((char*)sqlite3_column_text(statement, counter)));
 			else
 				break;
@@ -147,9 +154,7 @@ QList<QString> library::queryLinkedList(QString query)
 
 	return results;
 }
-/**
- * @todo remove unused variable cols
- */
+
 QString library::querySingle(QString query)
 {
 	sqlite3_stmt *statement;
@@ -157,8 +162,7 @@ QString library::querySingle(QString query)
 
 	if(sqlite3_prepare_v2(this->db, query.toLocal8Bit(), -1, &statement, 0) == SQLITE_OK)
 	{
-		int cols = sqlite3_column_count(statement);
-		int result = 0;
+		register int result = 0;
 		while(true)
 		{
 			result = sqlite3_step(statement);
