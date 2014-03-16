@@ -49,7 +49,7 @@ library::library(QObject *parent) :
 	querySingle("CREATE TABLE IF NOT EXISTS authors (author NUMERIC, book NUMERIC);");
 	querySingle("CREATE TABLE IF NOT EXISTS author (key INTEGER PRIMARY KEY, name TEXT);");
 	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS author_index ON author(name ASC);");
-	querySingle("CREATE TABLE IF NOT EXISTS book (key INTEGER PRIMARY KEY, pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, publish_date TEXT, readed NUMERIC, added_date TEXT, translation NUMERIC, print_version NUMERIC, format NUMERIC, buying_date TEXT, comments TEXT, my_favorit NUMERIC);");
+	querySingle("CREATE TABLE IF NOT EXISTS book (key INTEGER PRIMARY KEY, pages NUMERIC, language NUMERIC, description TEXT, serie NUMERIC, publisher NUMERIC, title TEXT, isbn TEXT, publish_date TEXT, readed NUMERIC, added_date TEXT, translation NUMERIC, print_version NUMERIC, format NUMERIC, buying_date TEXT, comments TEXT, my_favorit NUMERIC, image TEXT, rating : NUMERIC);");
 	querySingle("CREATE TABLE IF NOT EXISTS genre (key INTEGER PRIMARY KEY, name TEXT);");
 	querySingle("CREATE UNIQUE INDEX IF NOT EXISTS genre_index ON genre(name ASC);");
 	querySingle("CREATE TABLE IF NOT EXISTS genres (book NUMERIC, genre NUMERIC);");

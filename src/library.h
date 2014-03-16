@@ -36,8 +36,6 @@
  *
  * @brief Small explanation about the database structure.
  *
- * @todo adding more fields for more gui informations.
- *
  * @dot
  * digraph example {
  *   fontname = "Bitstream Vera Sans"
@@ -55,9 +53,9 @@
  *     arrowhead = "none"
  *   ]
  *
- *   authors [ label="{authors|authors : NUMERIC\lbook : NUMERIC\l}" ];
- *   author [ label="{author|name : TEXT\lkey : NUMERIC\l}" ];
- *   book [ label="{book|rating : NUMERIC\lpages : NUMERIC\llanguage : NUMERIC\ldescrtiption : TEXT\lserie : NUMERIC\lpublisher : NUMERIC\ltitle : TEXT\lisbn : TEXT\lkey : NUMERIC\l}" ];
+ *   authors [ label="{authors|author : NUMERIC\lbook : NUMERIC\l}" ];
+ *   author [ label="{author|key : NUMERIC\lname : TEXT\l}" ];
+ *   book [ label="{book|key : NUMERIC\lpages : NUMERIC\llanguage : NUMERIC\ldescription : TEXT\lserie : NUMERIC\lpublisher : NUMERIC\ltitle : TEXT\lisbn : TEXT\lpublish_date : TEXT\lreaded : NUMERIC\ladded_date : TEXT\ltranslation : NUMERIC\lprint_version : NUMERIC\lformat : NUMERIC\lbuying_date : TEXT\lcomments : TEXT\lmy_favorit : NUMERIC\limage : TEXT\lrating : NUMERIC\l}" ];
  *   genre [ label="{genre|key : NUMERIC\lname : TEXT\l}" ];
  *   genres [ label="{genres|book : NUMERIC\lgenre : NUMERIC\l}" ];
  *   keyword [ label="{keyword|key : NUMERIC\lname : TEXT\l}" ];
@@ -65,13 +63,24 @@
  *   languages [ label="{languages|key : NUMERIC\lname : TEXT\l}" ];
  *   publisher [ label="{publisher|key : NUMERIC\lname : TEXT\l}" ];
  *   serie [ label="{serie|key : NUMERIC\lname : TEXT\l}" ];
+ *   mark [ label="{mark|key : NUMERIC\lname TEXT\l}" ];
+ *   marks [ label="{marks|mark : NUMERIC\lbook : NUMERIC\l}" ];
+ *   translator [ label="{translator|key : NUMERIC\lname : TEXT\l}" ];
+ *   translators [ label="{translators|translator : NUMERIC\lbook : NUMERIC\l}" ];
+ *   rent [ label="{rent|key : NUMERIC\luser : TEXT\lbook : NUMERIC\lrent_date : TEXT\lback_date : TEXT\l}" ];
  *
  *   author -> authors [ taillabel="key 1", headlabel="authors 1..*" ];
  *   genre -> genres [ taillabel="key 1", headlabel="genre 1..*" ];
  *   keyword -> keywords [ taillabel="key 1", headlabel="keyword 1..*" ];
+ *   mark -> marks [ taillabel="key 1", headlabel="mark 1..*" ];
+ *   translator -> translators [ taillabel="key 1", headlabel="translators 1..*" ];
  *   authors -> book [ taillabel="book 1..*", headlabel="" ];
  *   genres -> book [ taillabel="book 1..*", headlabel="" ];
  *   keywords -> book [ taillabel="book 1..*", headlabel="" ];
+ *   translators -> book [ taillabel="book 1..*", headlabel=""  ];
+ *   marks -> book [ taillabel="book 1..*", headlabel="" ];
+ *
+ *   book -> rent [ taillabel="key 1", headlabel="book 1" ];
  *   book -> languages [ taillabel="language 1", headlabel="key 1" ];
  *   book -> publisher [ taillabel="publisher 1", headlabel="key 1" ];
  *   book -> serie [ taillabel="serie 1", headlabel="key 1" ];
@@ -87,7 +96,7 @@
  * Only for developing and make new cols to table easier.
  */
 enum {
-	DB_BOOK_RATING = 0,
+	DB_BOOK_KEY = 0,
 	DB_BOOK_PAGES,
 	DB_BOOK_LANGUAGE,
 	DB_BOOK_DESCRIPTION,
@@ -95,7 +104,17 @@ enum {
 	DB_BOOK_PUBLISHER,
 	DB_BOOK_TITLE,
 	DB_BOOK_ISBN,
-	DB_BOOK_KEY
+	DB_BOOK_PUBLISH_DATE,
+	DB_BOOK_READED,
+	DB_BOOK_ADDED_DATE,
+	DB_BOOK_TRANSLATION,
+	DB_BOOK_PRINT_VERSION,
+	DB_BOOK_FORMAT,
+	DB_BOOK_BUYING_DATE,
+	DB_BOOK_COMMENTS,
+	DB_BOOK_FAVORIT,
+	DB_BOOK_IMAGE,
+	DB_BOOK_RATING,
 };
 
 /**
