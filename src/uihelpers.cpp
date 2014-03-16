@@ -26,7 +26,7 @@ QStandardItemModel *getItemModelFromList(QList<QString> list)
 	QStandardItemModel *model = new QStandardItemModel();
 	QStandardItem *tmpItem[list.length()];
 
-	for(int counter = 0; counter < list.length(); counter++)
+	for(register int counter = 0; counter < list.length(); counter++)
 	{
 		tmpItem[counter] = new QStandardItem(list[counter]);
 		model->appendRow(tmpItem[counter]);

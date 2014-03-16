@@ -37,12 +37,12 @@ bool isbn::isValid()
 {
 	if(this->isbnNumber==NULL) return false;
 
-	int checksum = 0;
+	register int checksum = 0;
 	char *isbn = this->isbnNumber;
 
 	if(strlen(isbn)==13) // isbn13
 	{
-		for(unsigned short int counter=0;counter<13;counter++)
+		for(register unsigned short int counter = 0; counter < 13; counter++)
 		{
 			int factor=1;
 			if(counter%2 != 0 && counter!=0)
