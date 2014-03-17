@@ -121,7 +121,7 @@ enum {
 };
 
 /**
- * @brief enumerating for QStringList fields for get the right translation.
+ * @brief Enumerating for QStringList fields for get the right translation.
  */
 enum {
 	BOOK_KIND_PAPERBACK,
