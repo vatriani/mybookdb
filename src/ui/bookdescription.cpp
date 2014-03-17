@@ -49,6 +49,8 @@ bookdescription::bookdescription(QWidget *parent) :
 	ui->groupBoxAuthors->addToChooser(_library->getAllAuthors());
 	ui->comboBoxPublisher->addItems(_library->getAllPublishers());
 	ui->comboBoxCollection->addItems(_library->getAllCollections());
+	ui->comboBoxTranslator->addItems(_library->getAllTranslators());
+	ui->groupBoxMarks->addToChooser(_library->getAllMarks());
 	ui->comboBoxFormat->addItems(_book_kind);
 }
 
@@ -109,9 +111,19 @@ void bookdescription::openBook(QString key)
 	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[DB_BOOK_LANGUAGE]));
 	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[DB_BOOK_PUBLISHER]));
 
+	ui->checkBoxReaded->setChecked(book[DB_BOOK_READED].toInt());
+	ui->checkBoxFavorit->setChecked(book[DB_BOOK_FAVORIT].toInt());
+
 	QPixmap *cover = _imagestore->getImageFromKey(book[DB_BOOK_TITLE],book[DB_BOOK_ISBN]);
 	if(cover != NULL)
 		ui->Cover->setPixmap(*cover);
+
+	//setComboBoxIndex(ui->comboBoxTranslator, _library->getTranslatorsOfBook(this->bookKey));
+	ui->groupBoxMarks->addToView(_library->getMarksOfBook(this->bookKey));
+	ui->lineEditPrintVersion->setText(book[DB_BOOK_PRINT_VERSION]);
+	ui->lineEditTranslated->setText(book[DB_BOOK_TRANSLATION]);
+	/**  @todo Adding QTextDocument for displaying over plain text edit. */
+	//ui->plainTextEditDescription->setText(book[DB_BOOK_DESCRIPTION]);
 }
 
 void bookdescription::addAuthor(QString)
