@@ -24,6 +24,7 @@
 
 
 #include <QSettings>
+#include <QDebug>
 
 
 
@@ -49,28 +50,38 @@ imagestore::~imagestore()
 	delete this->imagePath;
 }
 
-QPixmap *imagestore::getImageFromKey(QString key)
+QPixmap *imagestore::getImageFromKey(QString title, QString isbn)
 {
 	QPixmap *returnPixmap = new QPixmap();
 	QString imageFilePath = this->imagePath->absolutePath();
+	QByteArray hash;
 
-	imageFilePath.append("/").append(key).append(".png");
+	hash.append(isbn);
+	hash.append(title);
+	hash = QCryptographicHash::hash(hash,QCryptographicHash::Md5).toHex();
+
+	imageFilePath.append("/").append(hash).append(".png");
 	returnPixmap->load(imageFilePath);
-	if(!returnPixmap->width())
+	if(returnPixmap->width()<=0)
 	{
-		returnPixmap->load(imageFilePath.append(".png"));
 		return NULL;
 	}
-	else
-		return returnPixmap;
+	QPixmap *ret = new QPixmap(returnPixmap->scaled(QSize(100,200),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+	delete returnPixmap;
+	return ret;
 }
 
-bool imagestore::storeImage(QPixmap pixmap, QString key)
+bool imagestore::storeImage(QPixmap pixmap, QString title, QString isbn)
 {
 	QString imageFilePath = this->imagePath->absolutePath();
+	QByteArray hash;
 
-	imageFilePath.append("/").append(key).append(".png");
+	hash.append(isbn);
+	hash.append(title);
+	hash = QCryptographicHash::hash(hash,QCryptographicHash::Md5).toHex();
 
-	pixmap.scaled(QSize(280,445),Qt::KeepAspectRatio);
+	imageFilePath.append("/").append(hash).append(".png");
+
+	pixmap = pixmap.scaled(QSize(280,445),Qt::KeepAspectRatio);
 	return pixmap.save(imageFilePath);
 }

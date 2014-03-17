@@ -30,6 +30,7 @@
 #include <QString>
 #include <QDir>
 #include <QPixmap>
+#include <QCryptographicHash>
 
 
 
@@ -60,14 +61,14 @@ public:
 	 * @return Returning QPixmap pointer of the loaded image. If image doesn't
 	 * exists the NULL pointer is returned.
 	 */
-	QPixmap *getImageFromKey(QString);
+	QPixmap *getImageFromKey(QString,QString);
 	/**
 	 * @brief Store the image under keyvalue with automaic added fileextension.
 	 * @param pixmap The QPixmap object containing the image.
 	 * @param key The image file name without fileextension.
 	 * @return True if image could be saved.
 	 */
-	bool storeImage(QPixmap,QString);
+	bool storeImage(QPixmap,QString,QString);
 
 private:
 	/**
