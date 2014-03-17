@@ -226,6 +226,34 @@ QList<QString> library::getAuthorsOfBook(QString bookKey)
 	return this->queryLinkedList(bookQuery);
 }
 
+QList<QString> library::getMarksOfBook(QString bookKey)
+{
+	QString bookQuery ="SELECT mark.name FROM mark JOIN marks ON mark.key = marks.mark WHERE marks.book LIKE '";
+	bookQuery.append(bookKey);
+	bookQuery.append("';");
+
+	return this->queryLinkedList(bookQuery);
+}
+
+QList<QString> library::getAllMarks()
+{
+	return this->queryLinkedList("SELECT name FROM mark;");
+}
+
+QList<QString> library::getTranslatorsOfBook(QString bookKey)
+{
+	QString bookQuery ="SELECT translator.name FROM translator JOIN translators ON translator.key = translators.translator WHERE translators.book LIKE '";
+	bookQuery.append(bookKey);
+	bookQuery.append("';");
+
+	return this->queryLinkedList(bookQuery);
+}
+
+QList<QString> library::getAllTranslators()
+{
+	return this->queryLinkedList("SELECT name FROM translator;");
+}
+
 void library::removeAuthor(QString authorText)
 {
 	QString query ="'";

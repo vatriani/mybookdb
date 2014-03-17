@@ -211,6 +211,10 @@ public:
 	 * @see queryLinkedList(QString)
 	 */
 	QList<QString> getAuthorsOfBook(QString);
+	QList<QString> getMarksOfBook(QString);
+	QList<QString> getAllMarks();
+	QList<QString> getTranslatorsOfBook(QString);
+	QList<QString> getAllTranslators();
 	void removeAuthor(QString);
 	void addAuthorToBook(QString);
 	QList<QString> getAllPublishers();
