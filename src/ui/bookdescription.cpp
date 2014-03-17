@@ -31,6 +31,7 @@
 #include "../isbn.h"
 #include "../library.h"
 #include "../uihelpers.h"
+#include "../imagestore.h"
 
 bookdescription::bookdescription(QWidget *parent) :
 	QWidget(parent),
@@ -48,6 +49,7 @@ bookdescription::bookdescription(QWidget *parent) :
 	ui->groupBoxAuthors->addToChooser(_library->getAllAuthors());
 	ui->comboBoxPublisher->addItems(_library->getAllPublishers());
 	ui->comboBoxCollection->addItems(_library->getAllCollections());
+	ui->comboBoxFormat->addItems(_book_kind);
 }
 
 bookdescription::bookdescription(QString bookkey, QWidget *parent) :
@@ -106,6 +108,10 @@ void bookdescription::openBook(QString key)
 	setComboBoxIndex(ui->comboBoxCollection,_library->getSerieNameFromKey(book[DB_BOOK_SERIE]));
 	setComboBoxIndex(ui->comboBoxLanguage,_library->getLanguageFromKey(book[DB_BOOK_LANGUAGE]));
 	setComboBoxIndex(ui->comboBoxPublisher,_library->getPublisherFromKey(book[DB_BOOK_PUBLISHER]));
+
+	QPixmap *cover = _imagestore->getImageFromKey(book[DB_BOOK_TITLE],book[DB_BOOK_ISBN]);
+	if(cover != NULL)
+		ui->Cover->setPixmap(*cover);
 }
 
 void bookdescription::addAuthor(QString)
