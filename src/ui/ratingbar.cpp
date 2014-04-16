@@ -32,6 +32,7 @@ ratingbar::ratingbar(QWidget *parent) :
 	QWidget(parent)
 {
 	this->rating=0;
+	this->iconSize=18;
 	this->createUi();
 	this->setToolTip("Change with mousewheel");
 }
@@ -53,17 +54,31 @@ void ratingbar::setRating(int rating)
 	changeRating();
 }
 
+void ratingbar::setImageSize(int size)
+{
+	this->iconSize = size;
+
+	changeRating();
+}
+
+
 void ratingbar::changeRating()
 {
 	QIcon* starOff = new QIcon(":/toolbar/star_off.png");
 	QIcon* starOn = new QIcon(":/toolbar/star_on.png");
 
+	/** @todo Adding fallback stars  from theme */
+	/*if(starOff == NULL && starON == NULL)
+	{
+
+	}
+*/
 	for(int counter = 0; counter < 10; counter++)
 	{
 		if(counter+1 <= this->rating)
-			this->stars[counter]->setPixmap(starOn->pixmap(QSize(18,18)));
+			this->stars[counter]->setPixmap(starOn->pixmap(QSize(this->iconSize,this->iconSize)));
 		else
-			this->stars[counter]->setPixmap(starOff->pixmap(QSize(18,18)));
+			this->stars[counter]->setPixmap(starOff->pixmap(QSize(this->iconSize,this->iconSize)));
 	}
 }
 

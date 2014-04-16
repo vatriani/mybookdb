@@ -60,6 +60,8 @@ public:
 	 */
 	void setRating(int);
 
+	void setImageSize(int);
+
 signals:
 
 public slots:
@@ -91,6 +93,10 @@ private:
 	 * @brief Contains the actual rating.
 	 */
 	unsigned int rating;
+	/**
+	 * @brief
+	 */
+	unsigned int iconSize;
 };
 
 #endif // RATINGBAR_H
